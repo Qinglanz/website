@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Qinglan Zheng — Product designer who ships code</title>
+<meta name="description" content="Qinglan Zheng is a Toronto-based senior product designer at Fig who designs fintech lending experiences and builds design-to-code workflows with AI.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #0A0A0F; color: #F5F5F7; font-family: Manrope, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #B9F04A; text-decoration: none; }
+  a:hover { color: #CFFF6E; }
+  ::selection { background: #B9F04A; color: #0A0A0F; }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; background: #0A0A0F; position: relative; overflow: hidden;">
+  <div style="position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, #6D3CF7 0%, transparent 70%); opacity: 0.35; pointer-events: none;"></div>
+  <div style="position: absolute; top: 400px; left: -250px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, #B9F04A 0%, transparent 70%); opacity: 0.15; pointer-events: none;"></div>
+
+  <header style="max-width: 1120px; margin: 0 auto; padding: 28px 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; position: relative;">
+    <a href="#" style="font-weight: 800; font-size: 17px; color: #FFFFFF; letter-spacing: -0.01em;">Qinglan Zheng</a>
+    <nav style="display: flex; gap: 24px; align-items: center;">
+      <a href="#work" style="font-size: 14px; font-weight: 600; color: #F5F5F7;">Work</a>
+      <a href="#" title="About page — coming next" style="font-size: 14px; font-weight: 600; color: #F5F5F7;">About</a>
+      <a href="mailto:hello@qinglanzheng.com" style="font-size: 14px; font-weight: 700; color: #0A0A0F; background: #B9F04A; border-radius: 999px; padding: 10px 18px;">Get in touch</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section style="max-width: 1120px; margin: 0 auto; padding: clamp(72px, 12vw, 140px) 24px clamp(56px, 8vw, 96px); position: relative;">
+    <sc-if value="{{ showAvailability }}" hint-placeholder-val="{{ true }}">
+      <div style="display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; color: #B9F04A; border: 1px solid rgba(185,240,74,0.35); background: rgba(185,240,74,0.08); border-radius: 999px; padding: 6px 14px; margin-bottom: 32px;">
+        <span style="width: 7px; height: 7px; border-radius: 50%; background: #B9F04A; display: inline-block;"></span>
+        Open to senior / staff roles
+      </div>
+    </sc-if>
+    <h1 style="font-weight: 800; font-size: clamp(40px, 6.5vw, 80px); line-height: 1.03; letter-spacing: -0.03em; margin: 0 0 28px; max-width: 16ch; text-wrap: pretty;">I'm Qinglan — a product designer who ships code.</h1>
+    <p style="font-size: clamp(17px, 2vw, 21px); line-height: 1.55; color: #A8A8B3; max-width: 52ch; margin: 0 0 40px; text-wrap: pretty;">I design lending experiences at <a href="https://fig.ca" style="color: #FFFFFF; text-decoration: underline; text-decoration-color: #6D3CF7; text-underline-offset: 4px;">Fig</a> and build design-to-code workflows with AI. Small improvements that took weeks now ship in days.</p>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #F5F5F7; background: #17171F; border: 1px solid #2A2A35; border-radius: 999px; padding: 9px 16px;">Merged PRs in production</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #F5F5F7; background: #17171F; border: 1px solid #2A2A35; border-radius: 999px; padding: 9px 16px;">300% YoY growth at Fig</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #F5F5F7; background: #17171F; border: 1px solid #2A2A35; border-radius: 999px; padding: 9px 16px;">Architect → Product designer</span>
+    </div>
+  </section>
+
+  <!-- Featured work -->
+  <section id="work" style="max-width: 1120px; margin: 0 auto; padding: 0 24px clamp(64px, 8vw, 112px); position: relative;">
+    <div style="display: flex; align-items: baseline; justify-content: space-between; border-top: 1px solid #22222C; padding: 20px 0 40px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #7A7A87; letter-spacing: 0.08em; text-transform: uppercase; margin: 0;">Selected work</h2>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #55555F;">2019 — 2026</span>
+    </div>
+
+    <!-- Flagship card -->
+    <a href="CaseStudy-DesignInCode-Revolut.dc.html" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(24px, 4vw, 56px); align-items: center; background: linear-gradient(155deg, #17171F 0%, #1C1626 100%); border: 1px solid #2A2A35; border-radius: 24px; padding: clamp(28px, 4vw, 48px); margin-bottom: 24px; color: #F5F5F7; transition: border-color 0.2s ease, transform 0.2s ease;" style-hover="border-color: #6D3CF7; transform: translateY(-3px); text-decoration: none;">
+      <div>
+        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px; flex-wrap: wrap;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; color: #B9F04A; border: 1px solid rgba(185,240,74,0.3); border-radius: 999px; padding: 4px 10px;">weeks → days</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7A7A87;">FLAGSHIP · FIG · 2026</span>
+        </div>
+        <h3 style="font-weight: 800; font-size: clamp(26px, 3.2vw, 38px); line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 16px; text-wrap: pretty;">From weeks to days: building a design-in-code workflow at Fig</h3>
+        <p style="font-size: 16px; line-height: 1.6; color: #A8A8B3; margin: 0 0 24px; max-width: 46ch;">I pitched a two-week pilot, wired Figma and Claude into our codebase, and now ship UI changes as draft PRs — with engineering review intact.</p>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #B9F04A;">Read the case study →</span>
+      </div>
+      <div style="aspect-ratio: 4 / 3; border-radius: 16px; border: 1px dashed #3A3A45; background: repeating-linear-gradient(-45deg, #17171F 0px, #17171F 10px, #1C1C26 10px, #1C1C26 20px); display: flex; align-items: center; justify-content: center;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7A7A87; background: #0A0A0F; padding: 6px 12px; border-radius: 6px;">[ playground / merged PR screenshot ]</span>
+      </div>
+    </a>
+
+    <!-- Second featured card -->
+    <a href="#" title="Case study — coming next" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(24px, 4vw, 56px); align-items: center; background: linear-gradient(155deg, #17171F 0%, #1C1626 100%); border: 1px solid #2A2A35; border-radius: 24px; padding: clamp(28px, 4vw, 48px); margin-bottom: 24px; color: #F5F5F7; transition: border-color 0.2s ease, transform 0.2s ease;" style-hover="border-color: #6D3CF7; transform: translateY(-3px); text-decoration: none;">
+      <div style="aspect-ratio: 4 / 3; border-radius: 16px; border: 1px dashed #3A3A45; background: repeating-linear-gradient(-45deg, #17171F 0px, #17171F 10px, #1C1C26 10px, #1C1C26 20px); display: flex; align-items: center; justify-content: center;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7A7A87; background: #0A0A0F; padding: 6px 12px; border-radius: 6px;">[ application flow screens ]</span>
+      </div>
+      <div>
+        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px; flex-wrap: wrap;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; color: #B9F04A; border: 1px solid rgba(185,240,74,0.3); border-radius: 999px; padding: 4px 10px;">14 steps · end to end</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7A7A87;">FIG · 2024–26</span>
+        </div>
+        <h3 style="font-weight: 800; font-size: clamp(26px, 3.2vw, 38px); line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 16px; text-wrap: pretty;">Redesigning loan origination: a regulated lending flow end to end</h3>
+        <p style="font-size: 16px; line-height: 1.6; color: #A8A8B3; margin: 0 0 24px; max-width: 46ch;">From prequalification to booking — designing for trust at the exact moments people abandon, with priorities set by my own SQL on funnel drop-off.</p>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #B9F04A;">Read the case study →</span>
+      </div>
+    </a>
+
+    <!-- Secondary cards -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 16px;">
+      <sc-for list="{{ secondaryCards }}" as="card" hint-placeholder-count="3">
+        <a href="#" title="Case study — coming later" style="display: flex; flex-direction: column; gap: 14px; background: #14141B; border: 1px solid #24242E; border-radius: 20px; padding: 26px; color: #F5F5F7; transition: border-color 0.2s ease, transform 0.2s ease;" style-hover="border-color: #6D3CF7; transform: translateY(-3px); text-decoration: none;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; color: #B9F04A; border: 1px solid rgba(185,240,74,0.3); border-radius: 999px; padding: 4px 10px; align-self: flex-start;">{{ card.metric }}</span>
+          <h3 style="font-weight: 700; font-size: 21px; line-height: 1.25; margin: 0; letter-spacing: -0.01em; text-wrap: pretty;">{{ card.title }}</h3>
+          <p style="font-size: 14px; line-height: 1.55; color: #A8A8B3; margin: 0;">{{ card.blurb }}</p>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #55555F; margin-top: auto;">{{ card.tag }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid #22222C; background: #0E0E14; position: relative;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: clamp(48px, 6vw, 72px) 24px; display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; flex-wrap: wrap;">
+      <div>
+        <p style="font-weight: 800; font-size: clamp(22px, 3vw, 30px); letter-spacing: -0.02em; margin: 0 0 12px; max-width: 24ch; text-wrap: pretty;">Let's build something that ships.</p>
+        <a href="mailto:hello@qinglanzheng.com" style="font-family: 'JetBrains Mono', monospace; font-size: 14px;">hello@qinglanzheng.com</a>
+      </div>
+      <nav style="display: flex; gap: 24px; flex-wrap: wrap;">
+        <a href="https://www.linkedin.com/in/qinglanzheng" style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #F5F5F7;">LinkedIn</a>
+        <a href="https://github.com/qinglanzheng" style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #F5F5F7;">GitHub</a>
+        <a href="https://medium.com/@qinglanzheng" style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #F5F5F7;">Medium</a>
+      </nav>
+    </div>
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px 32px;">
+      <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #55555F; margin: 0;">Toronto, Canada · © 2026 Qinglan Zheng · Designed and coded by me</p>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showAvailability&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Hero&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      showAvailability: this.props.showAvailability ?? true,
+      secondaryCards: [
+        { metric: "#1 channel", title: "Elevating direct-to-consumer to the top acquisition channel", blurb: "Growing DTC from a side door into Fig's largest source of funded loans.", tag: "FIG · GROWTH" },
+        { metric: "+revenue", title: "Designing a payment protection opt-in flow to boost revenue", blurb: "An opt-in that earns its yes — clear terms, no dark patterns.", tag: "FIG · PRODUCT" },
+        { metric: "2000:1", title: "Redesigning the self-serve portal to a 2000:1 customer-to-agent ratio", blurb: "Letting customers manage payments, dates, and payoffs without calling in.", tag: "FIG · PORTAL" },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

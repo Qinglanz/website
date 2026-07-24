@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Redesigning Fig's loan origination flow — Qinglan Zheng</title>
+<meta name="description" content="Doubling pre-qual conversion by rebuilding Fig's desktop-era loan application into a mobile-first, step-by-step journey.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #FAF9F6; color: #16150F; font-family: Inter, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #B5501F; text-decoration: none; }
+  a:hover { color: #8A3C15; text-decoration: underline; text-underline-offset: 3px; }
+  ::selection { background: #B5501F; color: #FAF9F6; }
+  @keyframes mockupAutoScroll { 0%, 8% { transform: translateY(0); } 50%, 58% { transform: translateY(-54.5%); } 100% { transform: translateY(0); } }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div style="min-height: 100vh; background: #FAF9F6;">
+  <header style="max-width: 800px; margin: 0 auto; padding: 28px 24px 0; display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <a href="Home.dc.html" style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; color: #16150F; letter-spacing: 0.02em;">qinglan.zheng</a>
+    <a href="Home.dc.html" style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #55534B;">← all work</a>
+  </header>
+
+  <!-- Title block -->
+  <section style="max-width: 800px; margin: 0 auto; padding: clamp(56px, 9vw, 96px) 24px 48px;">
+    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 28px; flex-wrap: wrap;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; border: 1px solid #EAD3C2; border-radius: 4px; padding: 4px 8px;">21.4% → 44.1% conversion</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E;">FIG · LOAN ORIGINATION · 2026</span>
+    </div>
+    <h1 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(34px, 5.5vw, 56px); line-height: 1.1; letter-spacing: -0.015em; margin: 0 0 24px; text-wrap: pretty;">Redesigning Fig's loan origination flow</h1>
+    <p style="font-size: 19px; line-height: 1.6; color: #55534B; max-width: 56ch; margin: 0; text-wrap: pretty;">Doubling pre-qual conversion by rebuilding a desktop-era application into a mobile-first, step-by-step journey.</p>
+    <div style="display: flex; gap: 32px; flex-wrap: wrap; margin-top: 40px; padding-top: 32px; border-top: 1px solid #E4E1D8;">
+      <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-bottom: 4px;">ROLE</div><div style="font-size: 15px;">Senior product designer — end-to-end owner</div></div>
+      <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-bottom: 4px;">PLATFORM</div><div style="font-size: 15px;">Responsive web, mobile-first</div></div>
+      <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-bottom: 4px;">SCOPE</div><div style="font-size: 15px;">Full origination journey — pre-qual to booking</div></div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin-top: 24px;">
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 20px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 22px; color: #B5501F; margin-bottom: 6px;">21.4% → 44.1%</div>
+        <div style="font-size: 13px; color: #55534B;">Pre-qual completion — the funnel's biggest leak</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 20px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 22px; color: #B5501F; margin-bottom: 6px;">~90%</div>
+        <div style="font-size: 13px; color: #55534B;">Flinks bank-connection completion after the splash redesign</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 20px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 22px; color: #B5501F; margin-bottom: 6px;">80–90%</div>
+        <div style="font-size: 13px; color: #55534B;">Of applicants on mobile, now the flow's real primary surface</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Context -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">01 · Context</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">The flow is the entire business</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0;">Fig, a Fairstone Bank company, offers fully digital personal loans up to $35,000 in Canada. The origination flow — 14 steps from "how much do you want to borrow?" to "your loan is booked," gated by a soft credit check at the offer and a hard check at booking — is the product. It had grown organically over time and was showing its age. My mandate was to redesign it end-to-end.</p>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 16px 0 0;">Most traffic arrives through aggregator partners, not Fig's own site — so the flow is often a user's first encounter with the Fig name, with no built-in trust or context. That shaped a second, quieter mandate: build trust for Fig within the flow itself, not just streamline it.</p>
+  </section>
+
+  <!-- Problem -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">02 · The problem</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">A desktop-era form, on a mobile-only user base</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 16px;"><strong>The pre-qual form was a wall.</strong> One long page asked for everything at once — name, DOB, phone, email, income, SIN, address, housing costs — before showing anything in return. Over a two-week sample, 4,608 users viewed it and 986 completed it: 21.4%, meaning roughly 80% of paid and partner traffic was lost before Fig could make an offer.</p>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 16px;"><strong>It was slow, on the wrong device.</strong> Median completion time was 2m 16s with a long tail past ten minutes — yet 80–90% of users were on mobile, pinching through a desktop two-column form with no progress indicator and no way to review previous answers.</p>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 24px;"><strong>Users who did get through were confused.</strong> CX tickets clustered on a few questions: will this hurt my credit score, why did my APR change, what drives my monthly payment, can I repay early. The old offer and customization screens answered none of them — the term slider led with APR, "pre-approved" jargon went unexplained, and error states left users fearing their credit had been damaged.</p>
+    <figure style="margin: 0;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-bottom: 12px;">BEFORE · ONE SCROLLING FORM</div>
+      <div style="width: 100%; max-height: 640px; overflow-y: auto; border-radius: 8px; border: 1px solid #E4E1D8;">
+        <img src="uploads/E2E Prequalification.png" alt="Original pre-qual form: a single long scrolling page with Personal details, Residential address, and Loan details sections all on one screen, ending in a 'Get my guaranteed offer' button" style="width: 100%; display: block;">
+      </div>
+      <figcaption style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-top: 8px;">Scroll to see the full form — Personal details, Residential address, and Loan details all on one page</figcaption>
+    </figure>
+    <div style="margin: 32px 0 0; background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 28px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-bottom: 20px;">PRE-QUAL FUNNEL · VIEWED → COMPLETED (SEP 1–15)</div>
+      <div style="display: flex; align-items: flex-end; gap: 40px; height: 140px;">
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; flex: 1;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 20px; color: #16150F; margin-bottom: 8px;">100% · 4,608</span>
+          <div style="width: 100%; height: 100%; background: #EAD3C2; border-radius: 6px 6px 0 0;"></div>
+          <span style="font-size: 13px; color: #55534B; margin-top: 10px;">Viewed pre-qual</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; flex: 1;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 20px; color: #B5501F; margin-bottom: 8px;">21.4% · 986</span>
+          <div style="width: 100%; height: 21.4%; background: #B5501F; border-radius: 6px 6px 0 0;"></div>
+          <span style="font-size: 13px; color: #55534B; margin-top: 10px;">Completed pre-qual</span>
+        </div>
+      </div>
+      <div style="display: flex; gap: 32px; flex-wrap: wrap; margin-top: 28px; padding-top: 20px; border-top: 1px solid #EFEDE6;">
+        <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; color: #B5501F;">~80%</div><div style="font-size: 13px; color: #55534B;">Drop-off in the form</div></div>
+        <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; color: #B5501F;">2m 16s</div><div style="font-size: 13px; color: #55534B;">Median time to convert</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">03 · Research &amp; discovery</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">The effort was the objection, not the loan</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 16px;">CX was swamped by basic questions the flow itself should have answered. Outreach calls to drop-off users, meant to recover applications, kept surfacing the same story instead: people asking whether checking their rate would hurt their credit score, whether they could repay early, and — because most arrive via aggregator partners with no prior context — who Fig even is and what its relationship to Fairstone is. Some weren't even looking for the right product; they wanted a line of credit, not an installment loan.</p>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0;">That reframed the brief: the aggregator-facing flow needed to build trust for Fig and set the right product expectation up front, in addition to answering the recurring credit-score, early-repayment, and rate-negotiation questions (partners like Walmart routinely have users asking to negotiate rate). Direct-to-consumer traffic, by contrast, already knows Fig from its own site — so that flow stays deliberately simpler, without the trust-building layer.</p>
+  </section>
+
+  <!-- Principles -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">04 · Design principles</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 24px; text-wrap: pretty;">Five rules that shaped every screen</h2>
+    <div style="display: flex; flex-direction: column; gap: 0;">
+      <sc-for list="{{ principles }}" as="p" hint-placeholder-count="5">
+        <div style="display: grid; grid-template-columns: 32px 1fr; gap: 16px; padding: 16px 0; border-top: 1px solid #E4E1D8;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F;">{{ $index }}</span>
+          <div style="font-size: 16px; color: #33322B; line-height: 1.5;"><strong>{{ p.title }}</strong> — {{ p.body }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Lead story: mobile-first nav + multi-step pre-qual -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">05 · Key decisions — 01</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">One long form becomes five focused steps</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 16px;">The single form became five steps — loan amount &amp; purpose, about yourself, personal info, employment, housing — each a single column with a progress bar, back navigation, and thumb-sized inputs. Contact info moved earlier: email at step 2, phone at step 3, unlocking drop-off recovery outreach for most of the funnel that previously had none.</p>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 16px;">Every screen repeats one reassurance under the CTA: "This will not impact your credit score." The credit-check moment is explicit — the CTA becomes "Get my offer" with plain-language disclosure of the soft TransUnion inquiry.</p>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 32px;">The redesign also collects four fields the old form didn't — immigration status, purpose of loan, employment status, and highest level of education — added for risk requirements but sequenced so they never feel like a wall. Employment status and loan purpose also moved from post-offer into pre-qual, so ineligible users are declined within the first couple minutes instead of after identity verification: less sunk cost for the user, a cleaner funnel for the business.</p>
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; margin-bottom: 16px;">AFTER · FIVE MOBILE STEPS — CLICK THROUGH</div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+      <div style="position: relative; width: 100%; max-width: 300px;">
+        <img src="{{ activeStep.img }}" alt="{{ activeStep.alt }}" style="width: 100%; display: block; border-radius: 14px; border: 1px solid #E4E1D8; box-shadow: 0 16px 40px rgba(22,21,15,0.12);">
+        <button onClick="{{ prevStep }}" aria-label="Previous step" style="position: absolute; left: -18px; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; border: 1px solid #E4E1D8; background: #FFFFFF; color: #16150F; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center;">←</button>
+        <button onClick="{{ nextStep }}" aria-label="Next step" style="position: absolute; right: -18px; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; border: 1px solid #E4E1D8; background: #FFFFFF; color: #16150F; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center;">→</button>
+      </div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F;">{{ activeStep.step }}</div>
+      <div style="display: flex; gap: 8px;">
+        <sc-for list="{{ prequalSteps }}" as="step" hint-placeholder-count="5">
+          <button onClick="{{ step.goTo }}" aria-label="Go to {{ step.step }}" style="width: 8px; height: 8px; border-radius: 50%; border: none; padding: 0; cursor: pointer; background: {{ step.dotColor }};"></button>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 28px;">
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; color: #B5501F; margin-bottom: 6px;">21.4% → 44.1%</div>
+        <div style="font-size: 14px; color: #55534B;">Pre-qual completion, roughly doubled</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; color: #B5501F; margin-bottom: 6px;">1 of 5</div>
+        <div style="font-size: 14px; color: #55534B;">Decisions per screen, down from one long form</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; color: #B5501F; margin-bottom: 6px;">Step 2</div>
+        <div style="font-size: 14px; color: #55534B;">Earliest point email is captured — unlocking outreach</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; color: #B5501F; margin-bottom: 6px;">2m 16s → 2m 5s</div>
+        <div style="font-size: 14px; color: #55534B;">Median time to convert — despite four added fields for risk</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; color: #B5501F; margin-bottom: 6px;">3.7% → 0.6%</div>
+        <div style="font-size: 14px; color: #55534B;">KYC PII mismatch, after splitting date of birth into three fields</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; color: #B5501F; margin-bottom: 6px;">2 min</div>
+        <div style="font-size: 14px; color: #55534B;">Time to decline ineligible users, down from after ID verification</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Supporting redesigns gallery -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">06 · Key decisions — across the flow</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 32px; text-wrap: pretty;">Four more moments, redesigned to reduce doubt</h2>
+
+    <div style="display: grid; grid-template-columns: 44px 1fr; gap: 20px; padding: 24px 0; border-top: 1px solid #E4E1D8;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F; padding-top: 2px;">01</span>
+      <div>
+        <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 21px; margin: 0 0 10px;">An offer page that closes the loop</h3>
+        <p style="font-size: 16px; line-height: 1.65; color: #55534B; margin: 0 0 16px; max-width: 58ch;">Most users hit this screen never having heard of Fig — aggregator traffic arrives cold, mid-decision, comparing offers. So the page carries three jobs at once. Trust: Fig is introduced as "A Fairstone Bank Company," with verified customer testimonials alongside the offer. Transparency: the offer card leads with the numbers users actually weigh — monthly payment from, guaranteed fixed APR, term — with an honest expiry date, and an FAQ pre-answers the questions flooding CX: credit-score impact, early repayment, whether the rate is negotiable, whether this is even the right product. Effort: email verification is gated here, at the moment of highest intent, with a "just a few minutes to finish" cue framing what's left. The strategic call was recognizing this page isn't a receipt — it's the pitch.</p>
+        <div style="display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;">
+          <div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-bottom: 10px; text-align: center;">BEFORE</div>
+            <div style="position: relative; width: 215px; aspect-ratio: 430/932; border-radius: 40px; border: 8px solid #16150F; overflow: hidden; background: #000;">
+              <image-slot id="offer-before" shape="rect" placeholder="Original offer screen" src="uploads/Frame 4285.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></image-slot>
+            </div>
+          </div>
+          <div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; margin-bottom: 10px; text-align: center;">AFTER</div>
+            <div style="position: relative; width: 215px; aspect-ratio: 430/932; border-radius: 40px; border: 8px solid #16150F; overflow: hidden; background: #000;">
+              <image-slot id="offer-after" shape="rect" placeholder="Redesigned offer screen" src="uploads/offer page - affiliate.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 220%; animation: mockupAutoScroll 20s ease-in-out infinite;"></image-slot>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 44px 1fr; gap: 20px; padding: 24px 0; border-top: 1px solid #E4E1D8;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F; padding-top: 2px;">02</span>
+      <div>
+        <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 21px; margin: 0 0 10px;">Customize your offer, payment-first</h3>
+        <p style="font-size: 16px; line-height: 1.65; color: #55534B; margin: 0 0 16px; max-width: 58ch;">The old screen led with term and buried the number that actually drives the decision. The redesign makes monthly payment the hero — pinned in a callout that updates live as amount and term sliders move — with a breakdown showing amount and term set the payment, while APR is fixed at pre-qual. It also states plainly: no early-repayment penalties. This closed a trust bug where quoted APR could drift between pre-approval and customization — a top ticket driver.</p>
+        <div style="width: 100%; aspect-ratio: 16/9; border-radius: 8px; border: 1px dashed #C9C6BD; background: #F5F3EE; display: flex; align-items: center; justify-content: center;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #8B887E;">[ select-offer redesign, monthly payment led ]</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 44px 1fr; gap: 20px; padding: 24px 0; border-top: 1px solid #E4E1D8;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F; padding-top: 2px;">03</span>
+      <div>
+        <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 21px; margin: 0 0 10px;">A bank connection worth trusting</h3>
+        <p style="font-size: 16px; line-height: 1.65; color: #55534B; margin: 0 0 16px; max-width: 58ch;">Connecting a bank account is the scariest ask in the flow. The Flinks splash was rebuilt around the two real objections — credentials never touch Fig, 500k+ monthly users trust Flinks — plus a "why do we need this?" disclosure. Completion now sits around 90%, near-ceiling for a bank-linking step: here, the job is reassurance, not persuasion.</p>
+        <div style="width: 100%; aspect-ratio: 16/9; border-radius: 8px; border: 1px dashed #C9C6BD; background: #F5F3EE; display: flex; align-items: center; justify-content: center;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #8B887E;">[ bank connection splash redesign ]</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 44px 1fr; gap: 20px; padding: 24px 0; border-top: 1px solid #E4E1D8;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F; padding-top: 2px;">04</span>
+      <div>
+        <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 21px; margin: 0 0 10px;">Error states that don't punish</h3>
+        <p style="font-size: 16px; line-height: 1.65; color: #55534B; margin: 0 0 16px; max-width: 58ch;">Previously, a failed verification or timeout showed a generic error, and users assumed the worst about their credit. The redesign leads with "your credit score is unaffected," then explains what happened and gives one clear recovery action.</p>
+        <div style="width: 100%; aspect-ratio: 16/9; border-radius: 8px; border: 1px dashed #C9C6BD; background: #F5F3EE; display: flex; align-items: center; justify-content: center;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #8B887E;">[ error screen redesign ]</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">07 · Outcomes</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 24px; text-wrap: pretty;">A flow built for the phone it's actually used on</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 28px;">
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; color: #B5501F; margin-bottom: 6px;">21.4% → 44.1%</div>
+        <div style="font-size: 14px; color: #55534B;">Pre-qual completion rate</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; color: #B5501F; margin-bottom: 6px;">~90%</div>
+        <div style="font-size: 14px; color: #55534B;">Flinks bank connection completion</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; color: #B5501F; margin-bottom: 6px;">2m 16s → 2m 5s</div>
+        <div style="font-size: 14px; color: #55534B;">Median time to convert</div>
+      </div>
+    </div>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0;">Splitting the form roughly doubled pre-qual conversion — the funnel's single biggest leak. Clarifying the offer, selection, connection, and error moments removed reasons to doubt, call, or quit, on the surface where most applicants actually were. Because pre-qual conversion compounds downstream, the lift carries through to bookings, not just completions.</p>
+  </section>
+
+  <!-- What I learned -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px 64px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">08 · What I learned</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">Trust is a conversion lever</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 16px;">The single highest-leverage copy in the flow is one repeated line: "This will not impact your credit score." Reassurance at the moment of anxiety outperformed any layout change.</p>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 16px;">Sequencing is design. Moving employment, purpose, email, and phone capture earlier changed business outcomes without changing a single field's UI.</p>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0;">CX tickets are a free research pipeline — every top theme became an in-context answer on the screen where it came up.</p>
+  </section>
+
+  <footer style="border-top: 1px solid #E4E1D8; background: #F5F3EE;">
+    <div style="max-width: 800px; margin: 0 auto; padding: 40px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <a href="Home.dc.html" style="font-family: 'JetBrains Mono', monospace; font-size: 14px;">← Back to all work</a>
+      <a href="mailto:hello@qinglanzheng.com" style="font-family: 'JetBrains Mono', monospace; font-size: 14px;">hello@qinglanzheng.com</a>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { stepIndex: 0 };
+  renderVals() {
+    const rawSteps = [
+      { step: "01 · LOAN AMOUNT", img: "uploads/pre-qual form1.png", alt: "Loan amount step: $35,000 slider, loan purpose, and trust signals — fully digital, funds in 1 business day, no early repayment fees" },
+      { step: "02 · ABOUT YOURSELF", img: "uploads/pre-qual form2.png", alt: "About yourself step: legal first and last name, email address, consent to terms" },
+      { step: "03 · PERSONAL INFO", img: "uploads/pre-qual form3.png", alt: "Personal info step: date of birth, address, immigration/residence status, phone number" },
+      { step: "04 · EMPLOYMENT", img: "uploads/pre-qual form4.png", alt: "Employment status step: employment status, occupation, job title, employer, income, highest level of education" },
+      { step: "05 · HOUSING", img: "uploads/pre-qual form5.png", alt: "Housing status step: renting status, monthly rent, time at address, and Get my offer CTA" },
+    ];
+    const n = rawSteps.length;
+    const idx = this.state.stepIndex;
+    const prequalSteps = rawSteps.map((s, i) => ({
+      ...s,
+      dotColor: i === idx ? '#B5501F' : '#E4E1D8',
+      goTo: () => this.setState({ stepIndex: i }),
+    }));
+    const activeStep = prequalSteps[idx];
+    const prevStep = () => this.setState(st => ({ stepIndex: (st.stepIndex - 1 + n) % n }));
+    const nextStep = () => this.setState(st => ({ stepIndex: (st.stepIndex + 1) % n }));
+    const principles = [
+        { title: "Mobile is the default, not a breakpoint", body: "designed at 375px first; desktop is the adaptation." },
+        { title: "One decision per screen", body: "small commitments, visible progress, easy recovery." },
+        { title: "Answer the question before it's asked", body: "every anxiety found in CX tickets gets addressed in-context, not in a FAQ." },
+        { title: "Lead with what users care about", body: "monthly payment, not APR mechanics." },
+        { title: "Fail early, fail kindly", body: "collect decline-relevant data sooner; never leave a user unsure what an error cost them." },
+    ];
+    return { prequalSteps, activeStep, prevStep, nextStep, principles };
+  }
+}
+</script>
+</body>
+</html>

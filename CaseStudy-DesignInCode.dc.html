@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>From weeks to days: building a design-in-code workflow at Fig — Qinglan Zheng</title>
+<meta name="description" content="How a senior product designer at Fig piloted a design-in-code workflow with Claude, Cursor, and Figma MCP — shipping UI changes as draft PRs.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #FAF9F6; color: #16150F; font-family: Inter, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #B5501F; text-decoration: none; }
+  a:hover { color: #8A3C15; text-decoration: underline; text-underline-offset: 3px; }
+  ::selection { background: #B5501F; color: #FAF9F6; }
+  .pitch-doc-figure.is-visible { opacity: 1; transform: translateY(0); }
+  .lightbox-img { cursor: zoom-in; }
+  #lightbox-overlay { position: fixed; inset: 0; background: rgba(22,21,15,0.88); display: none; align-items: center; justify-content: center; z-index: 999; cursor: zoom-out; padding: 32px; }
+  #lightbox-overlay.is-open { display: flex; }
+  #lightbox-overlay img { max-width: 92vw; max-height: 92vh; border-radius: 8px; box-shadow: 0 24px 64px rgba(0,0,0,0.4); }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; background: #FAF9F6;">
+  <header style="max-width: 800px; margin: 0 auto; padding: 28px 24px 0; display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <a href="Home.dc.html" style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; color: #16150F; letter-spacing: 0.02em;">qinglan.zheng</a>
+    <a href="Home.dc.html" style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #55534B;">← all work</a>
+  </header>
+
+  <!-- Title block -->
+  <section style="max-width: 800px; margin: 0 auto; padding: clamp(56px, 9vw, 96px) 24px 48px;">
+    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 28px; flex-wrap: wrap;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; border: 1px solid #EAD3C2; border-radius: 4px; padding: 4px 8px;">weeks → days</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E;">FLAGSHIP · FIG · 2026</span>
+    </div>
+    <h1 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(34px, 5.5vw, 56px); line-height: 1.1; letter-spacing: -0.015em; margin: 0 0 24px; text-wrap: pretty;">From weeks to days: building a design-in-code workflow at Fig</h1>
+    <p style="font-size: 19px; line-height: 1.6; color: #55534B; max-width: 56ch; margin: 0; text-wrap: pretty;">How I pitched a two-week pilot, wired Figma and Claude into our production codebase, and turned small UI fixes from a weeks-long queue into same-day draft PRs.</p>
+    <div style="display: flex; gap: 32px; flex-wrap: wrap; margin-top: 40px; padding-top: 32px; border-top: 1px solid #E4E1D8;">
+      <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-bottom: 4px;">ROLE</div><div style="font-size: 15px;">Senior product designer</div></div>
+      <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-bottom: 4px;">TEAM</div><div style="font-size: 15px;">1 designer, 1 engineer</div></div>
+      <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-bottom: 4px;">TOOLS</div><div style="font-size: 15px;">Claude, Cursor, Figma MCP</div></div>
+    </div>
+  </section>
+
+  <!-- Section helper style repeated inline per spec -->
+
+  <!-- Problem -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">01 · The problem</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">Small UI fixes took weeks</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 16px;">Copy tweaks, spacing fixes, a reordered form field — the kind of change that should take an afternoon was queued behind sprint planning, engineering handoff, and a staging cycle. By the time I counted, more than 10 small improvements were sitting blocked, none of them contentious, all of them stuck in the same handoff chain.</p>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0;">The cost wasn't any single fix. It was the compounding drag: designers describing changes instead of making them, engineers re-deriving intent from a Figma frame, and a queue that only grew.</p>
+  </section>
+
+  <!-- The bet -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">02 · The bet</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">A two-week pilot, Shape Up style</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 16px;">I pitched leadership a small, time-boxed bet: one designer, one engineer, one surface, two weeks. Not a platform initiative — a test of whether AI tooling could let a designer ship real UI changes without breaking engineering review.</p>
+    <div style="background: #F5F3EE; border: 1px solid #E4E1D8; border-radius: 10px; padding: 24px; margin-top: 24px;">
+      <p style="font-family: 'Source Serif 4', Georgia, serif; font-style: italic; font-size: 19px; line-height: 1.6; color: #16150F; margin: 0;">"I wasn't sure Phase 3 would ever become real. It did."</p>
+    </div>
+    <figure style="margin: 24px 0 0;">
+      <img src="uploads/cycle1-bet-board-blurred-v3.png" alt="Cycle 1 bet-tracking board showing the AI Design in Code and Flinks Drop-off Reduction bets, both with Qinglan Zheng as Pitch DRI; other teams' bets are blurred" style="width: 100%; display: block; border-radius: 8px; border: 1px solid #E4E1D8;">
+      <figcaption style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-top: 8px;">Cycle 1 bet board — my bets in focus; other teams' bets blurred</figcaption>
+    </figure>
+  </section>
+
+  <!-- Pitch doc excerpt -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 8px 24px 40px;">
+    <figure class="pitch-doc-figure" style="margin: 0; width: 100%; animation: fadeInUp 0.7s ease both;">
+      <div id="pitch-doc-scroll-box" style="width: 100%; height: 620px; overflow-y: auto; border-radius: 10px; border: 1px solid #E4E1D8; box-shadow: 0 12px 32px rgba(22,21,15,0.08); position: relative;">
+        <img src="uploads/notion-pitch-doc-cropped.png" alt="Notion pitch doc: 'Reduce Time-to-Ship for Small UI Changes via Design-in-Code Pilot' — problem, impact, appetite, proposed solution, scope, risks, data considerations, and game plan" style="width: 100%; display: block;">
+      </div>
+      <figcaption style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-top: 10px; text-align: center;">Pitch doc — scroll to read, or click to enlarge</figcaption>
+    </figure>
+  </section>
+
+  <!-- Three phases -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">03 · Three phases</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 32px; text-wrap: pretty;">From a first PR to a production playground</h2>
+    <div style="display: grid; grid-template-columns: 44px 1fr; gap: 20px; padding: 24px 0; border-top: 1px solid #E4E1D8;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F; padding-top: 2px;">01</span>
+      <div>
+        <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 21px; margin: 0 0 10px;">First PR from Cursor</h3>
+        <p style="font-size: 16px; line-height: 1.65; color: #55534B; margin: 0 0 16px; max-width: 58ch;">The engineer and I shipped the first real change together, from a Cursor session directly into a draft PR — proving an AI-assisted diff could survive review unchanged.</p>
+        <figure style="margin: 0;">
+          <img src="uploads/Screenshot 2026-04-22 at 3.03.54 PM.png" alt="Cursor agent session in agent mode: prompt asking to change review-page copy from 'periodic credit checks' to 'periodic soft credit checks', the agent's plan using the design-change skill, and the resulting origination.ts diff" style="width: 100%; display: block; border-radius: 8px; border: 1px solid #E4E1D8;">
+          <figcaption style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-top: 8px;">First shipped fix — a Cursor agent session updating review-page credit-check copy</figcaption>
+        </figure>
+        <figure style="margin: 24px 0 0;">
+          <img src="uploads/Screenshot 2026-07-19 at 2.29.51 PM.png" alt="Slack message from Qinglan announcing the first PR shipped via the Design in Code pilot bet, with teammates congratulating her and reacting with celebration emoji" style="width: 100%; display: block; border-radius: 8px; border: 1px solid #E4E1D8;">
+          <figcaption style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-top: 8px;">The team's reaction — first PR shipped under the pilot</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: 44px 1fr; gap: 20px; padding: 24px 0; border-top: 1px solid #E4E1D8;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F; padding-top: 2px;">02</span>
+      <div>
+        <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 21px; margin: 0 0 10px;">Figma MCP connected to the codebase</h3>
+        <p style="font-size: 16px; line-height: 1.65; color: #55534B; margin: 0 0 16px; max-width: 58ch;">We wired Figma's MCP server into the repo so component structure, tokens, and layout could be read directly from the design file instead of re-described by hand — backed by a real component library in Storybook.</p>
+        <figure style="margin: 0;">
+          <img src="uploads/Screenshot 2026-07-19 at 2.44.12 PM.png" alt="Storybook component library for Fig's LOS and SSP apps, showing organized folders for Components and Pages (Generic, Offer, PersonalLoan, Prequal) with a live PersonalLoan page preview including Flinks bank connection copy" style="width: 100%; display: block; border-radius: 8px; border: 1px solid #E4E1D8;">
+          <figcaption style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-top: 8px;">The component library in Storybook — the shared source of truth</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: 44px 1fr; gap: 20px; padding: 24px 0; border-top: 1px solid #E4E1D8;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F; padding-top: 2px;">03</span>
+      <div>
+        <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 21px; margin: 0 0 10px;">The Design Playground</h3>
+        <p style="font-size: 16px; line-height: 1.65; color: #55534B; margin: 0 0 16px; max-width: 58ch;">Production screens running with local state and mock data — a sandbox where I could test real UI against real components without touching a shared environment.</p>
+        <figure style="margin: 0;">
+          <img src="uploads/design-playground-cropped.png" alt="The Design Playground: a production loan-amount step running with mock data, next to a Design Playground panel listing every Prequal, Origination, Portal, and Chat screen plus a prompt box to describe a visual change for an agent to apply" style="width: 100%; display: block; border-radius: 8px; border: 1px solid #E4E1D8;">
+          <figcaption style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-top: 8px;">The Design Playground — every screen, one prompt box away from a change</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workflow today -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">04 · The workflow today</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 32px; text-wrap: pretty;">Figma or a prompt, to a merged PR</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 12px; padding: 24px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-bottom: 16px;">BEFORE · HANDOFF CHAIN</div>
+        <sc-for list="{{ beforeSteps }}" as="s" hint-placeholder-count="7">
+          <div style="display: flex; gap: 12px; align-items: baseline; padding: 9px 0; border-top: 1px solid #EFEDE6;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #C9C6BD; width: 16px;">{{ $index }}</span>
+            <span style="font-size: 14px; color: #55534B;">{{ s }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #EAD3C2; border-radius: 12px; padding: 24px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; margin-bottom: 16px;">AFTER · OWNED CHAIN</div>
+        <sc-for list="{{ afterSteps }}" as="s" hint-placeholder-count="6">
+          <div style="display: flex; gap: 12px; align-items: baseline; padding: 9px 0; border-top: 1px solid #EFEDE6;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; width: 16px;">{{ $index }}</span>
+            <span style="font-size: 14px; color: #16150F;">{{ s }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <figure style="margin: 32px 0 0;">
+      <img src="uploads/Screenshot 2026-07-20 at 5.32.26 PM.png" alt="GitHub profile activity for qinglanzheng-prog showing a contribution graph, commits created in fig-financial/figgy, and a pull request titled 'feat(prequal): update legal name copy and focus-triggered hints'" style="width: 100%; display: block; border-radius: 8px; border: 1px solid #E4E1D8;">
+      <figcaption style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-top: 8px;">GitHub activity — commits and PRs shipped through the workflow</figcaption>
+    </figure>
+  </section>
+
+  <!-- Results -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px 64px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">05 · Results</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 24px; text-wrap: pretty;">Weeks became days — with review intact</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 28px;">
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; color: #B5501F; margin-bottom: 6px;">weeks → days</div>
+        <div style="font-size: 14px; color: #55534B;">Turnaround for small UI fixes</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; color: #B5501F; margin-bottom: 6px;">0</div>
+        <div style="font-size: 14px; color: #55534B;">Handoffs, staging pushes, and QA cycles for small changes</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; color: #B5501F; margin-bottom: 6px;">100%</div>
+        <div style="font-size: 14px; color: #55534B;">Changes still pass engineering review</div>
+      </div>
+    </div>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0;">The pilot didn't remove engineering — it removed the parts of the process that existed only to translate intent from one person to another. Review stayed. The queue didn't.</p>
+  </section>
+
+  <footer style="border-top: 1px solid #E4E1D8; background: #F5F3EE;">
+    <div style="max-width: 800px; margin: 0 auto; padding: 40px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <a href="Home.dc.html" style="font-family: 'JetBrains Mono', monospace; font-size: 14px;">← Back to all work</a>
+      <a href="mailto:hello@qinglanzheng.com" style="font-family: 'JetBrains Mono', monospace; font-size: 14px;">hello@qinglanzheng.com</a>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    const scrollBox = document.getElementById('pitch-doc-scroll-box');
+    if (scrollBox) {
+      let direction = 1;
+      let paused = false;
+      let resumeTimer = null;
+      const step = () => {
+        if (!paused) {
+          const max = scrollBox.scrollHeight - scrollBox.clientHeight;
+          if (scrollBox.scrollTop >= max) direction = -1;
+          if (scrollBox.scrollTop <= 0) direction = 1;
+          scrollBox.scrollTop += direction * 0.6;
+        }
+      };
+      const autoScrollInterval = setInterval(step, 16);
+      const pauseAutoScroll = () => {
+        paused = true;
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(() => { paused = false; }, 2500);
+      };
+      scrollBox.addEventListener('wheel', pauseAutoScroll, { passive: true });
+      scrollBox.addEventListener('touchstart', pauseAutoScroll, { passive: true });
+      scrollBox.addEventListener('mouseenter', pauseAutoScroll);
+    }
+    let box = document.getElementById('lightbox-overlay');
+    if (!box) {
+      box = document.createElement('div');
+      box.id = 'lightbox-overlay';
+      const preview = document.createElement('img');
+      box.appendChild(preview);
+      document.body.appendChild(box);
+      box.addEventListener('click', () => box.classList.remove('is-open'));
+    }
+    const preview = box.querySelector('img');
+    document.querySelectorAll('img').forEach((pic) => {
+      if (pic === preview) return;
+      pic.classList.add('lightbox-img');
+      pic.addEventListener('click', () => {
+        preview.src = pic.src;
+        preview.alt = pic.alt;
+        box.classList.add('is-open');
+      });
+    });
+  }
+  renderVals() {
+    return {
+
+      beforeSteps: ["Designer specs change in Figma", "Designer writes handoff notes", "Ticket enters engineering backlog", "Engineer re-implements from spec", "Engineer pushes to staging", "Designer/QA reviews staging", "Fixes looped back, re-queued"],
+      afterSteps: ["Figma or prompt", "AI-assisted code in the playground", "Designer previews against real data", "Draft PR opened directly", "Engineering review", "Merge"],
+
+    };
+  }
+}
+</script>
+</body>
+</html>
