@@ -91,7 +91,7 @@
     <!-- Secondary cards -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 16px;">
       <sc-for list="{{ secondaryCards }}" as="card" hint-placeholder-count="3">
-        <a href="#" title="Case study — coming later" style="display: flex; flex-direction: column; gap: 14px; background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 14px; padding: 28px; color: #16150F; transition: border-color 0.2s ease, box-shadow 0.2s ease;" style-hover="border-color: #B5501F; box-shadow: 0 2px 24px rgba(14,90,82,0.08); text-decoration: none;">
+        <a href="{{ card.href }}" style="display: flex; flex-direction: column; gap: 14px; background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 14px; padding: 28px; color: #16150F; transition: border-color 0.2s ease, box-shadow 0.2s ease;" style-hover="border-color: #B5501F; box-shadow: 0 2px 24px rgba(14,90,82,0.08); text-decoration: none;">
           <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; border: 1px solid #EAD3C2; border-radius: 4px; padding: 4px 8px; align-self: flex-start;">{{ card.metric }}</span>
           <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 22px; line-height: 1.25; margin: 0; text-wrap: pretty;">{{ card.title }}</h3>
           <p style="font-size: 14px; line-height: 1.55; color: #55534B; margin: 0;">{{ card.blurb }}</p>
@@ -126,9 +126,12 @@ class Component extends DCLogic {
     return {
       showAvailability: this.props.showAvailability ?? true,
       secondaryCards: [
-        { metric: "#1 channel", title: "Elevating direct-to-consumer to the top acquisition channel", blurb: "Growing DTC from a side door into Fig’s largest source of funded loans.", tag: "FIG · GROWTH" },
-        { metric: "+revenue", title: "Designing a payment protection opt-in flow to boost revenue", blurb: "An opt-in that earns its yes — clear terms, no dark patterns.", tag: "FIG · PRODUCT" },
-        { metric: "2000:1", title: "Redesigning the self-serve portal to a 2000:1 customer-to-agent ratio", blurb: "Letting customers manage payments, dates, and payoffs without calling in.", tag: "FIG · PORTAL" },
+        { metric: "#1 channel", title: "Elevating direct-to-consumer to the top acquisition channel", blurb: "Growing DTC from a side door into Fig’s largest source of funded loans.", tag: "FIG · GROWTH", href: "CaseStudy-DTC.dc.html" },
+        { metric: "+revenue", title: "Designing a payment protection opt-in flow to boost revenue", blurb: "An opt-in that earns its yes — clear terms, no dark patterns.", tag: "FIG · PRODUCT", href: "CaseStudy-CreditInsurance.dc.html" },
+        { metric: "2000:1", title: "Redesigning the self-serve portal to a 2000:1 customer-to-agent ratio", blurb: "Letting customers manage payments, dates, and payoffs without calling in.", tag: "FIG · PORTAL", href: "CaseStudy-SelfServicePortal.dc.html" },
+        { metric: "+20% response", title: "Initiating a messaging redesign that increased response rate by 20%", blurb: "Data-driven design across a two-sided care marketplace.", tag: "CAREGUIDE · MESSAGING", href: "CaseStudy-ResponseRate.dc.html" },
+        { metric: "80% would try it", title: "Designing Famealy: a food-sharing platform", blurb: "Connecting busy parents to homemade dinner from local home chefs.", tag: "SIDE PROJECT · MARKETPLACE", href: "CaseStudy-Famealy.dc.html" },
+        { metric: "Before product design", title: "Architectural designs that connect people in the physical world", blurb: "Work from Gensler, AECOM, and GLS — planning, parks, and mixed-use development.", tag: "ARCHITECTURE", href: "CaseStudy-OtherWorks.dc.html" },
       ],
     };
   }

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Redesigning Fig's self-service portal — Qinglan Zheng</title>
+<meta name="description" content="Redesigning Fig's self-service portal to a 2000:1 customer-to-agent ratio, letting customers manage payments, dates, and payoffs without calling in.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #FAF9F6; color: #16150F; font-family: Inter, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #B5501F; text-decoration: none; }
+  a:hover { color: #8A3C15; text-decoration: underline; text-underline-offset: 3px; }
+  ::selection { background: #B5501F; color: #FAF9F6; }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; background: #FAF9F6;">
+  <header style="max-width: 800px; margin: 0 auto; padding: 28px 24px 0; display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <a href="Home.dc.html" style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; color: #16150F; letter-spacing: 0.02em;">qinglan.zheng</a>
+    <a href="Home.dc.html" style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #55534B;">← all work</a>
+  </header>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: clamp(56px, 9vw, 96px) 24px 48px;">
+    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 28px; flex-wrap: wrap;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; border: 1px solid #EAD3C2; border-radius: 4px; padding: 4px 8px;">2000:1 customer-to-agent ratio</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E;">FIG · SELF-SERVE PORTAL · 2023–24</span>
+    </div>
+    <h1 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(34px, 5.5vw, 56px); line-height: 1.1; letter-spacing: -0.015em; margin: 0 0 24px; text-wrap: pretty;">Redesigning the self-service portal to a 2000:1 customer-to-agent ratio</h1>
+    <p style="font-size: 19px; line-height: 1.6; color: #55534B; max-width: 56ch; margin: 0; text-wrap: pretty;">Letting customers manage payments, dates, and payoffs without calling in — as CX ticket volume grew with Fig's customer base.</p>
+    <div style="display: flex; gap: 32px; flex-wrap: wrap; margin-top: 40px; padding-top: 32px; border-top: 1px solid #E4E1D8;">
+      <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-bottom: 4px;">TIMELINE</div><div style="font-size: 15px;">Phase I Q4 2023, Phase II Q4 2024</div></div>
+      <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-bottom: 4px;">ROLE</div><div style="font-size: 15px;">Design lead</div></div>
+      <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-bottom: 4px;">TEAM</div><div style="font-size: 15px;">Product manager, Engineers, CX team</div></div>
+      <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-bottom: 4px;">STATUS</div><div style="font-size: 15px;">Launched</div></div>
+    </div>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 0 24px 40px;">
+    <div style="border-radius: 12px; overflow: hidden; border: 1px solid #E4E1D8;">
+      <img src="uploads/67e71912c47e19402131e540_new crop-p-1080.jpg" alt="Fig self-service portal shown on a phone" style="width: 100%; display: block;">
+    </div>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">01 · The problem</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">Growth was outpacing CX capacity</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0;">Fig was getting more CX tickets as its customer base grew. Fig needed a better self-serve portal so users could manage their own loans — letting customers hit their goal in minutes with independence, while CX saved time and reduced error.</p>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">02 · Design overview</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">A mobile-friendly portal, transformed over time</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 24px;">The new self-service portal offers a mobile app–like experience that helps users easily navigate across functionalities. Initially, all features were clustered on the homepage, making navigation challenging.</p>
+    <div style="border-radius: 12px; overflow: hidden; border: 1px solid #E4E1D8;">
+      <img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/67eeea70ddcb4163ffbba151_0ace6838813bc3901876d82c78e57e6b_design%20iterations.png" alt="Self-service portal design iterations" style="width: 100%; display: block;">
+    </div>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">03 · Research</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">Data-informed design</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 24px;">Through data analysis and user interviews, key improvement areas were identified — starting with the most common customer inquiries.</p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+      <div style="border-radius: 10px; overflow: hidden; border: 1px solid #E4E1D8;">
+        <img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/67eeec13f043f17714ae46ab_Screen%20Shot%202025-04-03%20at%204.12.06%20PM.png" alt="Top customer inquiries analysis" style="width: 100%; display: block;">
+      </div>
+      <div style="border-radius: 10px; overflow: hidden; border: 1px solid #E4E1D8;">
+        <img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/68d44000c736e7cd5b6c25f4_payment%20design%20final.jpg" alt="Payment management design" style="width: 100%; display: block;">
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">04 · Final outcome</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">Loan summaries, autopay, payments, transactions — all self-serve</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 24px;">The new self-service portal introduces functionality including loan summaries, autopay setup, payment management, and transaction updates to help customers manage their loan on their own.</p>
+    <div style="border-radius: 12px; overflow: hidden; border: 1px solid #E4E1D8;">
+      <img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/68d44712c1c2b2dd00d1581a_features%20(1).png" alt="Self-service portal final features" style="width: 100%; display: block;">
+    </div>
+  </section>
+
+  <footer style="border-top: 1px solid #E4E1D8; background: #F5F3EE;">
+    <div style="max-width: 800px; margin: 0 auto; padding: 40px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <a href="Home.dc.html" style="font-family: 'JetBrains Mono', monospace; font-size: 14px;">← Back to all work</a>
+      <a href="CaseStudy-ResponseRate.dc.html" style="font-family: 'JetBrains Mono', monospace; font-size: 14px;">Next: Messaging response rate →</a>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+</body>
+</html>
