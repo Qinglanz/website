@@ -73,9 +73,9 @@
     </a>
 
     <!-- Second featured card -->
-    <a href="#" title="Case study — coming next" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(24px, 4vw, 56px); align-items: center; background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 14px; padding: clamp(28px, 4vw, 48px); margin-bottom: 24px; color: #16150F; transition: border-color 0.2s ease, box-shadow 0.2s ease;" style-hover="border-color: #B5501F; box-shadow: 0 2px 24px rgba(14,90,82,0.08); text-decoration: none;">
-      <div style="aspect-ratio: 4 / 3; border-radius: 8px; border: 1px dashed #C9C6BD; background: repeating-linear-gradient(-45deg, #F5F3EE 0px, #F5F3EE 10px, #EFEDE6 10px, #EFEDE6 20px); display: flex; align-items: center; justify-content: center;">
-        <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; background: #FAF9F6; padding: 6px 12px; border-radius: 4px;">[ application flow screens ]</span>
+    <a href="CaseStudy-LoanOrigination.dc.html" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(24px, 4vw, 56px); align-items: center; background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 14px; padding: clamp(28px, 4vw, 48px); margin-bottom: 24px; color: #16150F; transition: border-color 0.2s ease, box-shadow 0.2s ease;" style-hover="border-color: #B5501F; box-shadow: 0 2px 24px rgba(14,90,82,0.08); text-decoration: none;">
+      <div style="aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; border: 1px solid #E4E1D8;">
+        <img src="uploads/c71eb413-1fb8-4544-8e06-15d8f0857591.png" alt="Origination redesign: selected screens from pre-qualified offer through booking success" style="width: 100%; height: 100%; object-fit: cover; display: block;">
       </div>
       <div>
         <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px; flex-wrap: wrap;">
@@ -91,7 +91,7 @@
     <!-- Secondary cards -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 16px;">
       <sc-for list="{{ secondaryCards }}" as="card" hint-placeholder-count="3">
-        <a href="#" title="Case study — coming later" style="display: flex; flex-direction: column; gap: 14px; background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 14px; padding: 28px; color: #16150F; transition: border-color 0.2s ease, box-shadow 0.2s ease;" style-hover="border-color: #B5501F; box-shadow: 0 2px 24px rgba(14,90,82,0.08); text-decoration: none;">
+        <a href="{{ card.href }}" style="display: flex; flex-direction: column; gap: 14px; background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 14px; padding: 28px; color: #16150F; transition: border-color 0.2s ease, box-shadow 0.2s ease;" style-hover="border-color: #B5501F; box-shadow: 0 2px 24px rgba(14,90,82,0.08); text-decoration: none;">
           <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; border: 1px solid #EAD3C2; border-radius: 4px; padding: 4px 8px; align-self: flex-start;">{{ card.metric }}</span>
           <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 22px; line-height: 1.25; margin: 0; text-wrap: pretty;">{{ card.title }}</h3>
           <p style="font-size: 14px; line-height: 1.55; color: #55534B; margin: 0;">{{ card.blurb }}</p>
@@ -126,9 +126,12 @@ class Component extends DCLogic {
     return {
       showAvailability: this.props.showAvailability ?? true,
       secondaryCards: [
-        { metric: "#1 channel", title: "Elevating direct-to-consumer to the top acquisition channel", blurb: "Growing DTC from a side door into Fig’s largest source of funded loans.", tag: "FIG · GROWTH" },
-        { metric: "+revenue", title: "Designing a payment protection opt-in flow to boost revenue", blurb: "An opt-in that earns its yes — clear terms, no dark patterns.", tag: "FIG · PRODUCT" },
-        { metric: "2000:1", title: "Redesigning the self-serve portal to a 2000:1 customer-to-agent ratio", blurb: "Letting customers manage payments, dates, and payoffs without calling in.", tag: "FIG · PORTAL" },
+        { metric: "#1 channel", title: "Elevating direct-to-consumer to the top acquisition channel", blurb: "Growing DTC from a side door into Fig’s largest source of funded loans.", tag: "FIG · GROWTH", href: "CaseStudy-DTC.dc.html" },
+        { metric: "+revenue", title: "Designing a payment protection opt-in flow to boost revenue", blurb: "An opt-in that earns its yes — clear terms, no dark patterns.", tag: "FIG · PRODUCT", href: "CaseStudy-CreditInsurance.dc.html" },
+        { metric: "2000:1", title: "Redesigning the self-serve portal to a 2000:1 customer-to-agent ratio", blurb: "Letting customers manage payments, dates, and payoffs without calling in.", tag: "FIG · PORTAL", href: "CaseStudy-SelfServicePortal.dc.html" },
+        { metric: "+20% response", title: "Initiating a messaging redesign that increased response rate by 20%", blurb: "Data-driven design across a two-sided care marketplace.", tag: "CAREGUIDE · MESSAGING", href: "CaseStudy-ResponseRate.dc.html" },
+        { metric: "80% would try it", title: "Designing Famealy: a food-sharing platform", blurb: "Connecting busy parents to homemade dinner from local home chefs.", tag: "SIDE PROJECT · MARKETPLACE", href: "CaseStudy-Famealy.dc.html" },
+        { metric: "Before product design", title: "Architectural designs that connect people in the physical world", blurb: "Work from Gensler, AECOM, and GLS — planning, parks, and mixed-use development.", tag: "ARCHITECTURE", href: "CaseStudy-OtherWorks.dc.html" },
       ],
     };
   }
