@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>The Insight Engine — Qinglan Zheng</title>
+<meta name="description" content="Turning scattered user signals — SMS replies, support tickets, and chatbot logs — into a monthly AI-assisted research pipeline that becomes funded bets.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #FAF9F6; color: #16150F; font-family: Inter, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #B5501F; text-decoration: none; }
+  a:hover { color: #8A3C15; text-decoration: underline; text-underline-offset: 3px; }
+  ::selection { background: #B5501F; color: #FAF9F6; }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div style="min-height: 100vh; background: #FAF9F6;">
+  <header style="max-width: 800px; margin: 0 auto; padding: 28px 24px 0; display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <a href="Home.dc.html" style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; color: #16150F; letter-spacing: 0.02em;">qinglan.zheng</a>
+    <a href="Home.dc.html" style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #55534B;">← all work</a>
+  </header>
+
+  <!-- Title block -->
+  <section style="max-width: 800px; margin: 0 auto; padding: clamp(56px, 9vw, 96px) 24px 48px;">
+    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 28px; flex-wrap: wrap;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; border: 1px solid #EAD3C2; border-radius: 4px; padding: 4px 8px;">signals → insights → shipped</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E;">FIG · CONTINUOUS DISCOVERY · 2025–26</span>
+    </div>
+    <h1 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(34px, 5.5vw, 56px); line-height: 1.1; letter-spacing: -0.015em; margin: 0 0 24px; text-wrap: pretty;">The Insight Engine: how I turned scattered user signals into a monthly research pipeline</h1>
+    <p style="font-size: 19px; line-height: 1.6; color: #55534B; max-width: 56ch; margin: 0; text-wrap: pretty;">Every month, thousands of users tell Fig exactly why they hesitate, stall, or quit — in SMS replies, support tickets, and Figgy chat. Nobody had time to read it all. So I built an AI-assisted practice that does — and turned what it finds into pitches, bets, and shipped improvements.</p>
+    <div style="display: flex; gap: 32px; flex-wrap: wrap; margin-top: 40px; padding-top: 32px; border-top: 1px solid #E4E1D8;">
+      <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-bottom: 4px;">ROLE</div><div style="font-size: 15px;">Senior product designer</div></div>
+      <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-bottom: 4px;">CADENCE</div><div style="font-size: 15px;">Monthly reports + funnel monitoring</div></div>
+      <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-bottom: 4px;">TOOLS</div><div style="font-size: 15px;">Claude, SQL</div></div>
+    </div>
+  </section>
+
+  <!-- 01 Problem -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">01 · The problem</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">The users were talking. Nobody was listening at scale.</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 16px;">Fig's loan application is the entire business — 14 steps where every hesitation costs a booking. And users constantly explain their hesitations, unprompted: they reply to drop-off SMS campaigns, they write in to CX, they argue with Figgy, our support chatbot, at 2am.</p>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 16px;">But this feedback lived in three disconnected systems, in volumes no one could read end to end: ~1,000 SMS replies, ~1,500 tickets, and ~370 Figgy conversations a month. Research happened in bursts — a usability study here, a survey there — while the richest, most honest signal accumulated unread.</p>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0;"><strong>The gap wasn't data. It was cadence and synthesis.</strong></p>
+  </section>
+
+  <!-- 02 Practice -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">02 · The practice</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">Three signal streams, one monthly report</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 28px;">Each month I pull the raw data, run Claude-assisted thematic analysis with a consistent coding frame, and cross-reference every theme against the funnel step it comes from — so a complaint is never just a complaint, it's a complaint at Step 9 with a known drop-off rate.</p>
+    <div style="border-radius: 12px; border: 1px solid #E4E1D8; padding: 24px 26px; background: #FFFFFF; margin-bottom: 8px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8B887E; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px;">Sample month — top theme by stream</div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px;">
+        <div>
+          <div style="font-size: 13px; font-weight: 600; color: #16150F; margin-bottom: 10px;">SMS replies</div>
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;"><span style="font-size: 12px; color: #55534B; width: 110px; flex-shrink: 0;">Rate shock</span><div style="flex: 1; height: 8px; background: rgba(181,80,31,0.1); border-radius: 4px; overflow: hidden;"><div style="height: 100%; width: 100%; background: #B5501F;"></div></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; width: 32px; text-align: right;">26%</span></div>
+          <div style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 12px; color: #55534B; width: 110px; flex-shrink: 0;">Tech failures</span><div style="flex: 1; height: 8px; background: rgba(181,80,31,0.1); border-radius: 4px; overflow: hidden;"><div style="height: 100%; width: 38%; background: #B5501F; opacity: 0.55;"></div></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; width: 32px; text-align: right;">10%</span></div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 600; color: #16150F; margin-bottom: 10px;">CX tickets</div>
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;"><span style="font-size: 12px; color: #55534B; width: 110px; flex-shrink: 0;">Payment issues</span><div style="flex: 1; height: 8px; background: rgba(181,80,31,0.1); border-radius: 4px; overflow: hidden;"><div style="height: 100%; width: 100%; background: #B5501F;"></div></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; width: 32px; text-align: right;">18%</span></div>
+          <div style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 12px; color: #55534B; width: 110px; flex-shrink: 0;">Payoff / balance</span><div style="flex: 1; height: 8px; background: rgba(181,80,31,0.1); border-radius: 4px; overflow: hidden;"><div style="height: 100%; width: 89%; background: #B5501F; opacity: 0.55;"></div></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; width: 32px; text-align: right;">16%</span></div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 600; color: #16150F; margin-bottom: 10px;">Figgy chat</div>
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;"><span style="font-size: 12px; color: #55534B; width: 110px; flex-shrink: 0;">Flinks failures</span><div style="flex: 1; height: 8px; background: rgba(181,80,31,0.1); border-radius: 4px; overflow: hidden;"><div style="height: 100%; width: 100%; background: #B5501F;"></div></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; width: 32px; text-align: right;">23%</span></div>
+          <div style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 12px; color: #55534B; width: 110px; flex-shrink: 0;">Decline, no reason</span><div style="flex: 1; height: 8px; background: rgba(181,80,31,0.1); border-radius: 4px; overflow: hidden;"><div style="height: 100%; width: 76%; background: #B5501F; opacity: 0.55;"></div></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; width: 32px; text-align: right;">18%</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-bottom: 28px;">A sample month's top theme per stream — themes are cross-referenced against the funnel step and escalation rate behind them</div>
+
+    <div style="display: flex; flex-direction: column; gap: 0; margin-top: 28px;">
+      <div style="display: grid; grid-template-columns: 44px 1fr; gap: 20px; padding: 22px 0; border-top: 1px solid #E4E1D8;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F; padding-top: 3px;">01</span>
+        <div>
+          <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 21px; margin: 0 0 10px;">SMS insight report</h3>
+          <p style="font-size: 16px; line-height: 1.65; color: #55534B; margin: 0 0 12px; max-width: 58ch;">Drop-off recovery campaigns invite replies, and users answer with reasons: rate shock ("you lost me at 12+"), credential distrust ("why do you need my banking password"), and bank-linking failures. Each reply is classified by theme, sentiment, and funnel step.</p>
+          <a href="https://claude.ai/public/artifacts/e4e4707e-a303-40a0-81ab-8b9ef95eb30a" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F; border: 1px solid #EAD3C2; border-radius: 8px; padding: 8px 14px; background: #FFFFFF;">↗ Open sample SMS insight report</a>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 44px 1fr; gap: 20px; padding: 22px 0; border-top: 1px solid #E4E1D8;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F; padding-top: 3px;">02</span>
+        <div>
+          <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 21px; margin: 0 0 10px;">Ticket analysis</h3>
+          <p style="font-size: 16px; line-height: 1.65; color: #55534B; margin: 0 0 12px; max-width: 58ch;">Every CX ticket is themed and mapped to the screen that generated it. Top drivers become design targets: this pipeline is how APR drift between pre-approval and customization was identified as a top ticket driver and fixed in the <a href="CaseStudy-LoanOrigination.dc.html">customize-offer redesign</a>.</p>
+          <a href="https://claude.ai/public/artifacts/0ca231ce-2195-48be-9206-35ca40d03c24" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F; border: 1px solid #EAD3C2; border-radius: 8px; padding: 8px 14px; background: #FFFFFF;">↗ Open sample ticket analysis report</a>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 44px 1fr; gap: 20px; padding: 22px 0; border-top: 1px solid #E4E1D8;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F; padding-top: 3px;">03</span>
+        <div>
+          <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 21px; margin: 0 0 10px;">Figgy chat analysis</h3>
+          <p style="font-size: 16px; line-height: 1.65; color: #55534B; margin: 0 0 12px; max-width: 58ch;">Chatbot transcripts are the most unfiltered stream — users ask Figgy what they won't ask a human. Bank-linking failures alone drove 23% of one month's conversations and an 87% escalation rate — the bot had no answer for a single one. Recurring questions become in-context copy on the screen where they arise.</p>
+          <a href="https://claude.ai/public/artifacts/99019c7e-bd09-46b6-a7a4-313c0da974f0" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F; border: 1px solid #EAD3C2; border-radius: 8px; padding: 8px 14px; background: #FFFFFF;">↗ Open sample Figgy chat analysis report</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="background: #F1EFE9; border: 1px solid #E4E1D8; border-radius: 12px; padding: 24px 26px; margin-top: 32px;">
+      <p style="font-size: 17px; line-height: 1.7; color: #33322B; margin: 0; max-width: 62ch;"><strong>Why AI makes this possible at all.</strong> Manually, one month of one stream is a week of coding work — nobody staffs that. With Claude doing first-pass classification against my coding frame, and me auditing samples and doing the synthesis, a full three-stream monthly report takes under 8 hours. The judgment stays human; the reading scales.</p>
+    </div>
+  </section>
+
+  <!-- 03 Fourth stream -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">03 · The fourth stream</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">Funnel monitoring: the numbers behind the words</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 28px;">Alongside the qualitative streams, I run monthly step-level conversion monitoring across all 14 steps — my own SQL, not a ticket to an analyst. Pre-qual completion, offer acceptance, KYC and Flinks completion, booking rate — tracked month over month, split by partner and device.</p>
+    <div style="border-radius: 12px; border: 1px solid #E4E1D8; padding: 26px 28px; background: #FFFFFF; margin-bottom: 8px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8B887E; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px;">Approved booking rate — monthly trend · Sep 2025 – Jun 2026</div>
+      <div style="display: flex; gap: 20px; margin-bottom: 16px;">
+        <div style="display: flex; align-items: center; gap: 7px;"><span style="width: 18px; height: 2px; background: #B5501F; display: inline-block;"></span><span style="font-size: 12px; color: #55534B;">Affiliate</span></div>
+        <div style="display: flex; align-items: center; gap: 7px;"><span style="width: 18px; height: 0; border-top: 2px dashed #8B887E; display: inline-block;"></span><span style="font-size: 12px; color: #55534B;">Embedded</span></div>
+      </div>
+      <svg viewBox="0 0 660 230" style="width: 100%; height: auto; display: block; overflow: visible;">
+        <line x1="40" y1="10" x2="40" y2="170" stroke="#E4E1D8" stroke-width="1"></line>
+        <line x1="40" y1="170" x2="620" y2="170" stroke="#E4E1D8" stroke-width="1"></line>
+        <line x1="40" y1="140" x2="620" y2="140" stroke="#E4E1D8" stroke-width="1" stroke-dasharray="3,3"></line>
+        <line x1="40" y1="110" x2="620" y2="110" stroke="#E4E1D8" stroke-width="1" stroke-dasharray="3,3"></line>
+        <line x1="40" y1="80" x2="620" y2="80" stroke="#E4E1D8" stroke-width="1" stroke-dasharray="3,3"></line>
+        <line x1="40" y1="50" x2="620" y2="50" stroke="#E4E1D8" stroke-width="1" stroke-dasharray="3,3"></line>
+        <text x="30" y="174" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="10" fill="#8B887E">30%</text>
+        <text x="30" y="144" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="10" fill="#8B887E">35%</text>
+        <text x="30" y="114" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="10" fill="#8B887E">40%</text>
+        <text x="30" y="84" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="10" fill="#8B887E">45%</text>
+        <text x="30" y="54" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="10" fill="#8B887E">50%</text>
+        <polyline points="60,144.2 120,105.2 180,92.6 240,119.6 300,84.2 360,87.8 420,65.6 480,62.6 540,45.2 600,32" fill="none" stroke="#8B887E" stroke-width="2" stroke-dasharray="6,4" stroke-linecap="round" stroke-linejoin="round"></polyline>
+        <circle cx="600" cy="32" r="4" fill="#8B887E" stroke="#FFFFFF" stroke-width="1.5"></circle>
+        <text x="600" y="20" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="#8B887E">53.0%</text>
+        <polyline points="60,158 120,129.8 180,122 240,131 300,113 360,103.4 420,93.2 480,95.6 540,76.4 600,74" fill="none" stroke="#B5501F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+        <circle cx="600" cy="74" r="5.5" fill="#B5501F" stroke="#FFFFFF" stroke-width="2"></circle>
+        <text x="600" y="94" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="#B5501F">46.0%</text>
+        <text x="60" y="188" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#8B887E">Sep</text>
+        <text x="120" y="188" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#8B887E">Oct</text>
+        <text x="180" y="188" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#8B887E">Nov</text>
+        <text x="240" y="188" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#8B887E">Dec</text>
+        <text x="300" y="188" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#8B887E">Jan</text>
+        <text x="360" y="188" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#8B887E">Feb</text>
+        <text x="420" y="188" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#8B887E">Mar</text>
+        <text x="480" y="188" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#8B887E">Apr</text>
+        <text x="540" y="188" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#8B887E">May</text>
+        <text x="600" y="188" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#16150F" font-weight="700">Jun</text>
+      </svg>
+    </div>
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-bottom: 28px;">Ten months of funnel monitoring by channel — the data layer behind every theme in the reports above</div>
+    <a href="https://claude.ai/public/artifacts/809a1f94-bb9c-426d-969f-03547014b6ff" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F; border: 1px solid #EAD3C2; border-radius: 8px; padding: 10px 16px; margin-bottom: 28px; background: #FFFFFF;">↗ Open sample funnel monitoring report</a>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 28px;">This is what turns themes into priorities. Qualitative tells me <em>why</em>; the funnel tells me <em>where</em> and <em>how much</em>. When <span style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 14px; background: rgb(255, 242, 168); border-bottom: 1px dashed rgb(183, 144, 0); color: rgb(74, 58, 0); padding: 1px 4px; border-radius: 3px;">40</span>% of SMS replies mention bank-connection fear, that's not an anecdote — that's a sized opportunity.</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; color: #B5501F; margin-bottom: 6px;">14 steps</div>
+        <div style="font-size: 14px; color: #55534B;">Monitored monthly, end to end</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; color: #B5501F; margin-bottom: 6px;">10 months</div>
+        <div style="font-size: 14px; color: #55534B;">Of trend data</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; color: #B5501F; margin-bottom: 6px;">16 reports</div>
+        <div style="font-size: 14px; color: #55534B;">Insight reports shipped</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 Insight to pitch -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">04 · From insight to pitch</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">Insights don't ship. Pitches do.</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 32px;">A monthly report that gets read and forgotten is decoration. The output of this practice is pitches — Shape Up-style, sized and evidenced, entered into the cycle betting table. The pattern: a theme recurs across streams → I size it against funnel data → I write a pitch with problem, evidence, appetite, and proposed solution → it becomes a bet with me as pitch DRI.</p>
+
+    <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 24px; margin: 0 0 14px; padding-top: 24px; border-top: 1px solid #E4E1D8;">The discovery — our best borrowers trust us least</h3>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 28px;">Splitting verification drop-off by credit band surfaced something no usability test would find. Drop-off didn't fall as credit quality rose — it climbed.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 28px;">
+      <div style="background: #FFFFFF; border: 1px solid #EAD3C2; border-radius: 12px; padding: 26px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 18px;">Onfido drop-off by credit band</div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #33322B;">800+</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 30px; color: #B5501F; line-height: 1;">43.1%</span>
+          </div>
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #33322B;">750–799</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 24px; color: #B5501F; line-height: 1;">32.8%</span>
+          </div>
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #33322B;">700–749</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 20px; color: #55534B; line-height: 1;">28.7%</span>
+          </div>
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-top: 10px; border-top: 1px solid #E4E1D8;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #8B887E;">under 650</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 20px; color: #8B887E; line-height: 1;">19.5–20.3%</span>
+          </div>
+        </div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #EAD3C2; border-radius: 12px; padding: 26px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 18px;">Bank connection drop-off</div>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 34px; color: #B5501F; line-height: 1; margin-bottom: 6px;">13.1%</div>
+            <div style="font-size: 14px; color: #55534B;">800+ credit band</div>
+          </div>
+          <div style="padding-top: 14px; border-top: 1px solid #E4E1D8;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 22px; color: #8B887E; line-height: 1; margin-bottom: 6px;">4.9%</div>
+            <div style="font-size: 14px; color: #55534B;">under 600 band</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 16px;">The lowest-risk applicants — the ones with the strongest unit economics — abandoned identity and bank verification at up to twice the rate of everyone else. Prime borrowers have options, expect a VIP experience, and are the most protective of their credentials. They rarely get declined — they leave.</p>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 20px;">The SMS stream confirmed the why in their own words:</p>
+    <div style="display: flex; flex-direction: column; gap: 10px; margin: 0 0 20px; max-width: 62ch;">
+      <blockquote style="margin: 0; padding: 14px 18px; background: #FFFFFF; border-left: 2px solid #B5501F; border-radius: 0 8px 8px 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; color: #33322B;">“Why do you require my banking password?”</blockquote>
+      <blockquote style="margin: 0; padding: 14px 18px; background: #FFFFFF; border-left: 2px solid #B5501F; border-radius: 0 8px 8px 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; color: #33322B;">“Can I submit a statement?”</blockquote>
+      <blockquote style="margin: 0; padding: 14px 18px; background: #FFFFFF; border-left: 2px solid #B5501F; border-radius: 0 8px 8px 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; color: #33322B;">“CIBC is unavailable.”</blockquote>
+    </div>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 16px;">Three of the top five stated blockers traced to one root cause: the applicant wants to continue, verification blocks them, no fallback exists.</p>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 36px;"><strong>This one insight — found at the intersection of funnel SQL, credit data, and SMS feedback — became two funded bets.</strong></p>
+
+    <div style="display: grid; grid-template-columns: 44px 1fr; gap: 20px; padding: 24px 0; border-top: 1px solid #E4E1D8;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F; padding-top: 3px;">BET 1</span>
+      <div>
+        <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 21px; margin: 0 0 10px;">Flinks Upload — alternative that users had been asking for</h3>
+        <p style="font-size: 16px; line-height: 1.65; color: #55534B; margin: 0 0 14px; max-width: 58ch;">534 applicants in a single quarter passed Onfido, then abandoned at bank connection — already acquired, already verified, with ~40% of their stated reasons addressable. The pitch: a two-week spike validating bank-statement upload as a CX-assisted recovery path — 15 free trial uploads negotiated with the vendor, existing underwriting and fraud controls untouched, dual Risk + Fraud approval on every case, explicit graduation criteria before anything customer-facing.</p>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 13px; margin: 0;"><span style="background: #FFF2A8; border-bottom: 1px dashed #B79000; color: #4A3A00; padding: 3px 6px; border-radius: 3px;">[[Update after pilot: X of 15 usable uploads · X funded]]</span></p>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 44px 1fr; gap: 20px; padding: 24px 0; border-top: 1px solid #E4E1D8;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F; padding-top: 3px;">BET 2</span>
+      <div>
+        <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 21px; margin: 0 0 10px;">Risk based tiered onboarding — prevent the loss upstream</h3>
+        <p style="font-size: 16px; line-height: 1.65; color: #55534B; margin: 0 0 14px; max-width: 58ch;">If prime borrowers behave differently, why do all borrowers get the same flow? The pitch: build the smallest reusable capability to route borrowers into onboarding experiences by risk segment, then test one lightweight trust screen before Onfido for prime users — control vs. test, feature-flagged at 20%, measured in PostHog. I designed the trust-screen variant and wrote the pitch. The sizing that won the bet: a 5pp reduction in prime Onfido drop-off projects to ~15 incremental booked loans and ~$330K/month in incremental loan volume — from one screen.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 14px;">
+          <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 20px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 22px; color: #B5501F; margin-bottom: 6px;">38% → 33%</div>
+            <div style="font-size: 13px; color: #55534B;">North star: prime Onfido drop-off</div>
+          </div>
+          <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 20px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 22px; color: #B5501F; margin-bottom: 6px;">~$330K/mo</div>
+            <div style="font-size: 13px; color: #55534B;">Projected incremental loan volume</div>
+          </div>
+        </div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 13px; margin: 0 0 14px;"><span style="background: #FFF2A8; border-bottom: 1px dashed #B79000; color: #4A3A00; padding: 3px 6px; border-radius: 3px;">[[Update with experiment results]]</span></p>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+          <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 20px 18px 16px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8B887E; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 14px;">Enter Fig flow rate</div>
+            <svg viewBox="0 0 220 130" style="width: 100%; height: auto; display: block;">
+              <line x1="0" y1="10" x2="220" y2="10" stroke="#EFEDE6" stroke-width="1"></line>
+              <line x1="0" y1="40" x2="220" y2="40" stroke="#EFEDE6" stroke-width="1"></line>
+              <line x1="0" y1="70" x2="220" y2="70" stroke="#EFEDE6" stroke-width="1"></line>
+              <line x1="0" y1="100" x2="220" y2="100" stroke="#EFEDE6" stroke-width="1"></line>
+              <polyline points="20,28 120,40 200,46" fill="none" stroke="#C0392B" stroke-width="2.5"></polyline>
+              <circle cx="20" cy="28" r="3" fill="#C0392B"></circle><circle cx="120" cy="40" r="3" fill="#C0392B"></circle><circle cx="200" cy="46" r="3" fill="#C0392B"></circle>
+              <polyline points="20,68 120,72 200,76" fill="none" stroke="#C97A3D" stroke-width="2.5"></polyline>
+              <circle cx="20" cy="68" r="3" fill="#C97A3D"></circle><circle cx="120" cy="72" r="3" fill="#C97A3D"></circle><circle cx="200" cy="76" r="3" fill="#C97A3D"></circle>
+              <polyline points="20,98 120,94 200,96" fill="none" stroke="#C9A227" stroke-width="2.5"></polyline>
+              <circle cx="20" cy="98" r="3" fill="#C9A227"></circle><circle cx="120" cy="94" r="3" fill="#C9A227"></circle><circle cx="200" cy="96" r="3" fill="#C9A227"></circle>
+              <polyline points="20,106 120,108 200,102" fill="none" stroke="#5B8C6E" stroke-width="2.5"></polyline>
+              <circle cx="20" cy="106" r="3" fill="#5B8C6E"></circle><circle cx="120" cy="108" r="3" fill="#5B8C6E"></circle><circle cx="200" cy="102" r="3" fill="#5B8C6E"></circle>
+              <polyline points="20,110 120,112 200,108" fill="none" stroke="#2F6F9E" stroke-width="2.5"></polyline>
+              <circle cx="20" cy="110" r="3" fill="#2F6F9E"></circle><circle cx="120" cy="112" r="3" fill="#2F6F9E"></circle><circle cx="200" cy="108" r="3" fill="#2F6F9E"></circle>
+              <text x="20" y="126" font-family="JetBrains Mono, monospace" font-size="8" fill="#8B887E">Apr</text>
+              <text x="112" y="126" font-family="JetBrains Mono, monospace" font-size="8" fill="#8B887E">May</text>
+              <text x="192" y="126" font-family="JetBrains Mono, monospace" font-size="8" fill="#8B887E">Jun</text>
+            </svg>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px;">
+              <span style="display: flex; align-items: center; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #55534B;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #C0392B; display: inline-block;"></span>&lt;700</span>
+              <span style="display: flex; align-items: center; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #55534B;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #C97A3D; display: inline-block;"></span>701-750</span>
+              <span style="display: flex; align-items: center; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #55534B;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #C9A227; display: inline-block;"></span>751-800</span>
+              <span style="display: flex; align-items: center; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #55534B;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #5B8C6E; display: inline-block;"></span>801-850</span>
+              <span style="display: flex; align-items: center; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #55534B;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #2F6F9E; display: inline-block;"></span>851-900</span>
+            </div>
+          </div>
+          <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 20px 18px 16px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8B887E; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 14px;">FFBR</div>
+            <svg viewBox="0 0 220 130" style="width: 100%; height: auto; display: block;">
+              <line x1="0" y1="10" x2="220" y2="10" stroke="#EFEDE6" stroke-width="1"></line>
+              <line x1="0" y1="40" x2="220" y2="40" stroke="#EFEDE6" stroke-width="1"></line>
+              <line x1="0" y1="70" x2="220" y2="70" stroke="#EFEDE6" stroke-width="1"></line>
+              <line x1="0" y1="100" x2="220" y2="100" stroke="#EFEDE6" stroke-width="1"></line>
+              <polyline points="20,92 120,90 200,88" fill="none" stroke="#2F6F9E" stroke-width="2.5"></polyline>
+              <circle cx="20" cy="92" r="3" fill="#2F6F9E"></circle><circle cx="120" cy="90" r="3" fill="#2F6F9E"></circle><circle cx="200" cy="88" r="3" fill="#2F6F9E"></circle>
+              <polyline points="20,62 120,60 200,52" fill="none" stroke="#5B8C6E" stroke-width="2.5"></polyline>
+              <circle cx="20" cy="62" r="3" fill="#5B8C6E"></circle><circle cx="120" cy="60" r="3" fill="#5B8C6E"></circle><circle cx="200" cy="52" r="3" fill="#5B8C6E"></circle>
+              <polyline points="20,54 120,52 200,50" fill="none" stroke="#C9A227" stroke-width="2.5"></polyline>
+              <circle cx="20" cy="54" r="3" fill="#C9A227"></circle><circle cx="120" cy="52" r="3" fill="#C9A227"></circle><circle cx="200" cy="50" r="3" fill="#C9A227"></circle>
+              <polyline points="20,44 120,42 200,38" fill="none" stroke="#C97A3D" stroke-width="2.5"></polyline>
+              <circle cx="20" cy="44" r="3" fill="#C97A3D"></circle><circle cx="120" cy="42" r="3" fill="#C97A3D"></circle><circle cx="200" cy="38" r="3" fill="#C97A3D"></circle>
+              <polyline points="20,26 120,30 200,22" fill="none" stroke="#C0392B" stroke-width="2.5"></polyline>
+              <circle cx="20" cy="26" r="3" fill="#C0392B"></circle><circle cx="120" cy="30" r="3" fill="#C0392B"></circle><circle cx="200" cy="22" r="3" fill="#C0392B"></circle>
+              <text x="20" y="126" font-family="JetBrains Mono, monospace" font-size="8" fill="#8B887E">Apr</text>
+              <text x="112" y="126" font-family="JetBrains Mono, monospace" font-size="8" fill="#8B887E">May</text>
+              <text x="192" y="126" font-family="JetBrains Mono, monospace" font-size="8" fill="#8B887E">Jun</text>
+            </svg>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px;">
+              <span style="display: flex; align-items: center; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #55534B;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #2F6F9E; display: inline-block;"></span>851-900</span>
+              <span style="display: flex; align-items: center; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #55534B;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #5B8C6E; display: inline-block;"></span>801-850</span>
+              <span style="display: flex; align-items: center; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #55534B;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #C9A227; display: inline-block;"></span>751-800</span>
+              <span style="display: flex; align-items: center; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #55534B;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #C97A3D; display: inline-block;"></span>701-750</span>
+              <span style="display: flex; align-items: center; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #55534B;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #C0392B; display: inline-block;"></span>&lt;700</span>
+            </div>
+          </div>
+          <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 20px 18px 16px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8B887E; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 14px;">Fig flow decline rate</div>
+            <svg viewBox="0 0 220 130" style="width: 100%; height: auto; display: block;">
+              <line x1="0" y1="10" x2="220" y2="10" stroke="#EFEDE6" stroke-width="1"></line>
+              <line x1="0" y1="40" x2="220" y2="40" stroke="#EFEDE6" stroke-width="1"></line>
+              <line x1="0" y1="70" x2="220" y2="70" stroke="#EFEDE6" stroke-width="1"></line>
+              <line x1="0" y1="100" x2="220" y2="100" stroke="#EFEDE6" stroke-width="1"></line>
+              <polyline points="20,76 120,26 200,28" fill="none" stroke="#C0392B" stroke-width="2.5"></polyline>
+              <circle cx="20" cy="76" r="3" fill="#C0392B"></circle><circle cx="120" cy="26" r="3" fill="#C0392B"></circle><circle cx="200" cy="28" r="3" fill="#C0392B"></circle>
+              <polyline points="20,88 120,80 200,76" fill="none" stroke="#C97A3D" stroke-width="2.5"></polyline>
+              <circle cx="20" cy="88" r="3" fill="#C97A3D"></circle><circle cx="120" cy="80" r="3" fill="#C97A3D"></circle><circle cx="200" cy="76" r="3" fill="#C97A3D"></circle>
+              <polyline points="20,90 120,84 200,84" fill="none" stroke="#C9A227" stroke-width="2.5"></polyline>
+              <circle cx="20" cy="90" r="3" fill="#C9A227"></circle><circle cx="120" cy="84" r="3" fill="#C9A227"></circle><circle cx="200" cy="84" r="3" fill="#C9A227"></circle>
+              <polyline points="20,92 120,104 200,86" fill="none" stroke="#5B8C6E" stroke-width="2.5"></polyline>
+              <circle cx="20" cy="92" r="3" fill="#5B8C6E"></circle><circle cx="120" cy="104" r="3" fill="#5B8C6E"></circle><circle cx="200" cy="86" r="3" fill="#5B8C6E"></circle>
+              <polyline points="20,98 120,102 200,100" fill="none" stroke="#2F6F9E" stroke-width="2.5"></polyline>
+              <circle cx="20" cy="98" r="3" fill="#2F6F9E"></circle><circle cx="120" cy="102" r="3" fill="#2F6F9E"></circle><circle cx="200" cy="100" r="3" fill="#2F6F9E"></circle>
+              <text x="20" y="126" font-family="JetBrains Mono, monospace" font-size="8" fill="#8B887E">Apr</text>
+              <text x="112" y="126" font-family="JetBrains Mono, monospace" font-size="8" fill="#8B887E">May</text>
+              <text x="192" y="126" font-family="JetBrains Mono, monospace" font-size="8" fill="#8B887E">Jun</text>
+            </svg>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px;">
+              <span style="display: flex; align-items: center; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #55534B;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #C0392B; display: inline-block;"></span>&lt;700</span>
+              <span style="display: flex; align-items: center; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #55534B;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #C97A3D; display: inline-block;"></span>701-750</span>
+              <span style="display: flex; align-items: center; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #55534B;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #C9A227; display: inline-block;"></span>751-800</span>
+              <span style="display: flex; align-items: center; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #55534B;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #5B8C6E; display: inline-block;"></span>801-850</span>
+              <span style="display: flex; align-items: center; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #55534B;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #2F6F9E; display: inline-block;"></span>851-900</span>
+            </div>
+          </div>
+        </div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-top: 12px;">Fig flow entry, FFBR, and decline rate by credit tier, April–June 2026 — prime borrowers enter, fund, and decline at consistently different rates than sub-prime</div>
+      </div>
+    </div>
+
+
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 32px 0 0;">The <a href="CaseStudy-DesignInCode.dc.html">design-in-code pilot</a> on this site started the same way — a pitch backed by a counted queue of blocked improvements. Three pitches, three bets, one method.</p>
+  </section>
+
+  <!-- 05 Results -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">05 · Results</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 24px; text-wrap: pretty;">A designer with a standing seat at the prioritization table</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 28px;">
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; color: #B5501F; margin-bottom: 6px;">16</div>
+        <div style="font-size: 14px; color: #55534B;">Monthly insight reports shipped to product, CX, and leadership</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; color: #B5501F; margin-bottom: 6px;">3</div>
+        <div style="font-size: 14px; color: #55534B;">Pitches written from pipeline insights, funded as bets</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 10px; padding: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; color: #B5501F; margin-bottom: 6px;">38% → 33%</div>
+        <div style="font-size: 14px; color: #55534B;">Headline metric moved by a pipeline-originated project</div>
+      </div>
+    </div>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0;">The compounding effect: design decisions at Fig now start from evidence I generate, not evidence I request. When I argue for a change, the funnel sizing and the user's own words are already on the table.</p>
+  </section>
+
+  <!-- 06 Learnings -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px 64px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">06 · What I learned</div>
+    <h2 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">Cadence beats depth</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 16px;"><strong>A monthly rhythm outperforms occasional deep dives.</strong> Stakeholders learn to expect the report; themes gain credibility by recurring across months; trend lines emerge that a one-off study can't see.</p>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 16px;"><strong>Users tell you everything — in the wrong places.</strong> The best research data at Fig was never in a research tool. It was in SMS replies and chatbot logs, waiting for someone to treat it as research.</p>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0 0 16px;"><strong>Averages hide your best users.</strong> The funnel looked healthy in aggregate; segmented by credit band, it was leaking its most valuable applicants. The most consequential insight of the year came from adding one GROUP BY.</p>
+    <p style="font-size: 17px; line-height: 1.7; color: #33322B; max-width: 62ch; margin: 0;"><strong>Insight is only half the job.</strong> The pipeline earns its keep the day an insight becomes a pitch, the pitch becomes a bet, and the bet moves a number.</p>
+  </section>
+
+  <footer style="border-top: 1px solid #E4E1D8; background: #F5F3EE;">
+    <div style="max-width: 800px; margin: 0 auto; padding: 40px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <a href="Home.dc.html" style="font-family: 'JetBrains Mono', monospace; font-size: 14px;">← Back to all work</a>
+      <a href="mailto:hello@qinglanzheng.com" style="font-family: 'JetBrains Mono', monospace; font-size: 14px;">hello@qinglanzheng.com</a>
+    </div>
+  </footer>
+</div>
+</x-dc>
+</body>
+</html>
