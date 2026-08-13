@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Architectural design work — Qinglan Zheng</title>
+<meta name="description" content="Architectural and landscape design work connecting people in the physical world, from firms including Gensler, AECOM, and GLS.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #072A24; color: #F7F7EB; font-family: 'Instrument Sans', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #7CF06B; text-decoration: none; }
+  a:hover { color: #A8FA9C; text-decoration: underline; text-underline-offset: 3px; }
+  ::selection { background: #7CF06B; color: #072A24; }
+
+  @keyframes riseIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(0.82); } }
+  h1, h2 { animation: riseIn 0.7s cubic-bezier(0.2,0.7,0.2,1) both; }
+  img { transition: transform 0.4s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.4s ease; }
+  img:hover { transform: translateY(-4px) scale(1.006); box-shadow: 0 22px 60px -30px rgba(124,240,107,0.45); }
+  a[href] { transition: color 0.2s ease, opacity 0.2s ease; }
+  [data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity 0.7s cubic-bezier(0.2,0.7,0.2,1), transform 0.7s cubic-bezier(0.2,0.7,0.2,1); }
+  [data-reveal].is-in { opacity: 1; transform: none; }
+</style>
+<script>
+  (function () {
+    var run = function () {
+      var host = document.querySelector('x-dc') || document.body;
+      var kids = host.querySelectorAll('section, figure, footer');
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+      kids.forEach(function (el, i) {
+        if (i === 0) return;
+        el.setAttribute('data-reveal', '');
+        el.style.transitionDelay = Math.min(i % 3, 2) * 70 + 'ms';
+        io.observe(el);
+      });
+    };
+    if (document.readyState === 'complete' || document.readyState === 'interactive') setTimeout(run, 400);
+    else window.addEventListener('DOMContentLoaded', function () { setTimeout(run, 400); });
+  })();
+</script>
+</helmet>
+
+<div style="min-height: 100vh; background: #072A24;">
+  <header style="max-width: 800px; margin: 0 auto; padding: 26px 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <a href="index.html" style="display: flex; align-items: center; gap: 9px; font-family: 'Instrument Sans', sans-serif; font-size: 14px; font-weight: 500; color: #F7F7EB; letter-spacing: 0.02em;">
+      <span style="width: 8px; height: 8px; border-radius: 50%; background: #7CF06B; box-shadow: 0 0 12px rgba(124,240,107,0.8); animation: pulseDot 2.4s ease-in-out infinite;"></span>qinglan.zheng
+    </a>
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="index.html#work" style="font-family: 'Instrument Sans', sans-serif; font-size: 13px; color: #9AA79F;">← all work</a>
+      <a href="about.html" style="font-family: 'Instrument Sans', sans-serif; font-size: 13px; color: #9AA79F;">About</a>
+      <button type="button" onClick="{{ toggleTheme }}" aria-label="Toggle light and dark mode" style="display: inline-flex; align-items: center; justify-content: center; color: #F7F7EB; background: rgba(247,247,235,0.06); border: 1px solid rgba(247,247,235,0.16); border-radius: 999px; width: 34px; height: 34px; padding: 0; cursor: pointer;" style-hover="border-color: #7CF06B; color: #7CF06B;">
+        <sc-if value="{{ isDark }}" hint-placeholder-val="{{ true }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"></path></svg></sc-if>
+        <sc-if value="{{ isLight }}" hint-placeholder-val="{{ false }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"></path></svg></sc-if>
+      </button>
+    </div>
+  </header>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: clamp(56px, 9vw, 96px) 24px 48px;">
+    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 28px; flex-wrap: wrap;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; border: 1px solid rgba(124,240,107,0.32); border-radius: 4px; padding: 4px 8px;">Before product design</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8CA39C;">ARCHITECTURE &amp; LANDSCAPE · SAN FRANCISCO</span>
+    </div>
+    <h1 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(34px, 5.5vw, 56px); line-height: 1.1; letter-spacing: -0.015em; margin: 0 0 24px; text-wrap: pretty;">Architectural designs that connect people in the physical world</h1>
+    <p style="font-size: 19px; line-height: 1.6; color: #AFB8AC; max-width: 56ch; margin: 0; text-wrap: pretty;">Before product design, I worked at some of the best architecture firms in San Francisco — Gensler, AECOM, GLS — as designer, job captain, and deputy project manager on high-profile local and international projects.</p>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">Balboa Reservoir</div>
+    <h2 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(22px, 3vw, 28px); line-height: 1.25; margin: 0 0 16px; text-wrap: pretty;">Planning a new San Francisco neighborhood</h2>
+    <p style="font-size: 16px; line-height: 1.6; color: #D8DCCE; max-width: 62ch; margin: 0 0 20px;">Close to Balboa BART Station and City College. <a href="http://www.balboareservoir.com/" target="_blank">Project website ↗</a></p>
+    <div style="border-radius: 12px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);">
+      <img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/5e0a8b9f780ce8a552b9d572_SF%20map1.jpg" alt="Balboa Reservoir site plan" style="width: 100%; display: block;">
+    </div>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">Crane Cove Park</div>
+    <h2 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(22px, 3vw, 28px); line-height: 1.25; margin: 0 0 16px; text-wrap: pretty;">A new waterfront public park in San Francisco</h2>
+    <p style="font-size: 16px; line-height: 1.6; color: #D8DCCE; max-width: 62ch; margin: 0 0 20px;">East of Illinois Street between 19th and Mariposa, along the Bay shoreline. <a href="https://sfport.com/crane-cove-park" target="_blank">Project info ↗</a></p>
+    <div style="border-radius: 12px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);">
+      <img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/5e0a9017edb7548f8cacec85_HIGH343569_482083_544075.jpg" alt="Crane Cove Park waterfront design" style="width: 100%; display: block;">
+    </div>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">Shenzhen Qianhai</div>
+    <h2 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(22px, 3vw, 28px); line-height: 1.25; margin: 0 0 16px; text-wrap: pretty;">Mixed-use development in Shenzhen's financial center</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+      <div style="border-radius: 10px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);"><img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/5e0a956aedb7546932ad7a49_inner%20corridor%20night.jpg" alt="Shenzhen Qianhai inner corridor at night" style="width: 100%; display: block;"></div>
+      <div style="border-radius: 10px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);"><img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/5e0a97827436089ea4eca916_Screen%20Shot%202019-12-30%20at%204.33.45%20PM.png" alt="Shenzhen Qianhai development rendering" style="width: 100%; display: block;"></div>
+    </div>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">Academic work</div>
+    <h2 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(22px, 3vw, 28px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">Landscape architecture work samples</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+      <div style="border-radius: 10px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);"><img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/6080896454ee9c64cd59efb7_Landscape%20Architecture%20Work%20Sample%20Qinglan%20Zheng%202018_Page_14.jpg" alt="Landscape architecture work sample" style="width: 100%; display: block;"></div>
+      <div style="border-radius: 10px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);"><img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/608089659cee72ce3946fb0d_Landscape%20Architecture%20Work%20Sample%20Qinglan%20Zheng%202018_Page_12.jpg" alt="Landscape architecture work sample" style="width: 100%; display: block;"></div>
+      <div style="border-radius: 10px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);"><img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/608089649cee722bd046fb0c_Landscape%20Architecture%20Work%20Sample%20Qinglan%20Zheng%202018_Page_11.jpg" alt="Landscape architecture work sample" style="width: 100%; display: block;"></div>
+      <div style="border-radius: 10px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);"><img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/6080871009ac1061aaa7c1bc_Screen%20Shot%202021-04-21%20at%204.06.52%20PM.png" alt="Landscape architecture work sample" style="width: 100%; display: block;"></div>
+      <div style="border-radius: 10px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);"><img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/60808964fc807441f7d44848_Landscape%20Architecture%20Work%20Sample%20Qinglan%20Zheng%202018_Page_13.jpg" alt="Landscape architecture work sample" style="width: 100%; display: block;"></div>
+      <div style="border-radius: 10px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);"><img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/6080880bd1334ec487cf7d7b_Screen%20Shot%202021-04-21%20at%204.13.14%20PM.png" alt="Landscape architecture work sample" style="width: 100%; display: block;"></div>
+      <div style="border-radius: 10px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);"><img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/608089648030f15124a7d1a7_Landscape%20Architecture%20Work%20Sample%20Qinglan%20Zheng%202018_Page_15.jpg" alt="Landscape architecture work sample" style="width: 100%; display: block;"></div>
+      <div style="border-radius: 10px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);"><img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/60808b64cd6fb90f9daab9c1_portfolio44.jpg" alt="Landscape architecture work sample" style="width: 100%; display: block;"></div>
+    </div>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">Inside &amp; outside of office</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+      <div style="border-radius: 10px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);"><img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/60808c28268b918264e2cd67_Screen%20Shot%202021-04-21%20at%203.56.25%20PM.png" alt="Inside and outside of office" style="width: 100%; display: block;"></div>
+      <div style="border-radius: 10px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);"><img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/60808c8ca2d29700c4a7c2db_IMG_5204.JPG" alt="Inside and outside of office" style="width: 100%; display: block;"></div>
+    </div>
+  </section>
+
+  <footer style="border-top: 1px solid rgba(247,247,235,0.08); background: #052220;">
+    <div style="max-width: 800px; margin: 0 auto; padding: 40px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <a href="index.html" style="font-family: 'Instrument Sans', sans-serif; font-size: 14px;">← Back to all work</a>
+      <a href="index.html" style="font-family: 'Instrument Sans', sans-serif; font-size: 14px;">All case studies →</a>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { theme: "dark" };
+
+  async _loadTheme() {
+    this._themeMod = await import("./theme-swap.js");
+    const theme = this._themeMod.readTheme("qz-portfolio-theme");
+    this.setState({ theme }, () => this._themeMod.applyTheme(theme));
+  }
+
+  _toggleTheme = () => {
+    const next = this.state.theme === "light" ? "dark" : "light";
+    this.setState({ theme: next }, () => {
+      if (this._themeMod) {
+        this._themeMod.applyTheme(next);
+        this._themeMod.saveTheme("qz-portfolio-theme", next);
+      }
+    });
+  };
+
+  componentDidMount() { this._loadTheme(); }
+
+  componentDidUpdate() { if (this._themeMod && this.state.theme === "light") this._themeMod.applyTheme("light"); }
+
+  renderVals() {
+    return {
+      isLight: this.state.theme === "light",
+      isDark: this.state.theme !== "light",
+      toggleTheme: this._toggleTheme,
+    };
+  }
+}
+</script>
+</body>
+</html>

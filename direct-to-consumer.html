@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Elevating Fig's Direct-to-Consumer channel — Qinglan Zheng</title>
+<meta name="description" content="Leading the redesign and rebrand of fig.ca so users could learn about Fig, build trust, and book loans directly — no partner required.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #072A24; color: #F7F7EB; font-family: 'Instrument Sans', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #7CF06B; text-decoration: none; }
+  a:hover { color: #A8FA9C; text-decoration: underline; text-underline-offset: 3px; }
+  ::selection { background: #7CF06B; color: #072A24; }
+
+  @keyframes riseIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(0.82); } }
+  h1, h2 { animation: riseIn 0.7s cubic-bezier(0.2,0.7,0.2,1) both; }
+  img { transition: transform 0.4s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.4s ease; }
+  img:hover { transform: translateY(-4px) scale(1.006); box-shadow: 0 22px 60px -30px rgba(124,240,107,0.45); }
+  a[href] { transition: color 0.2s ease, opacity 0.2s ease; }
+  [data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity 0.7s cubic-bezier(0.2,0.7,0.2,1), transform 0.7s cubic-bezier(0.2,0.7,0.2,1); }
+  [data-reveal].is-in { opacity: 1; transform: none; }
+</style>
+<script>
+  (function () {
+    var run = function () {
+      var host = document.querySelector('x-dc') || document.body;
+      var kids = host.querySelectorAll('section, figure, footer');
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+      kids.forEach(function (el, i) {
+        if (i === 0) return;
+        el.setAttribute('data-reveal', '');
+        el.style.transitionDelay = Math.min(i % 3, 2) * 70 + 'ms';
+        io.observe(el);
+      });
+    };
+    if (document.readyState === 'complete' || document.readyState === 'interactive') setTimeout(run, 400);
+    else window.addEventListener('DOMContentLoaded', function () { setTimeout(run, 400); });
+  })();
+</script>
+</helmet>
+
+<div style="min-height: 100vh; background: #072A24;">
+  <header style="max-width: 800px; margin: 0 auto; padding: 26px 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <a href="index.html" style="display: flex; align-items: center; gap: 9px; font-family: 'Instrument Sans', sans-serif; font-size: 14px; font-weight: 500; color: #F7F7EB; letter-spacing: 0.02em;">
+      <span style="width: 8px; height: 8px; border-radius: 50%; background: #7CF06B; box-shadow: 0 0 12px rgba(124,240,107,0.8); animation: pulseDot 2.4s ease-in-out infinite;"></span>qinglan.zheng
+    </a>
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="index.html#work" style="font-family: 'Instrument Sans', sans-serif; font-size: 13px; color: #9AA79F;">← all work</a>
+      <a href="about.html" style="font-family: 'Instrument Sans', sans-serif; font-size: 13px; color: #9AA79F;">About</a>
+      <button type="button" onClick="{{ toggleTheme }}" aria-label="Toggle light and dark mode" style="display: inline-flex; align-items: center; justify-content: center; color: #F7F7EB; background: rgba(247,247,235,0.06); border: 1px solid rgba(247,247,235,0.16); border-radius: 999px; width: 34px; height: 34px; padding: 0; cursor: pointer;" style-hover="border-color: #7CF06B; color: #7CF06B;">
+        <sc-if value="{{ isDark }}" hint-placeholder-val="{{ true }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"></path></svg></sc-if>
+        <sc-if value="{{ isLight }}" hint-placeholder-val="{{ false }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"></path></svg></sc-if>
+      </button>
+    </div>
+  </header>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: clamp(56px, 9vw, 96px) 24px 48px;">
+    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 28px; flex-wrap: wrap;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; border: 1px solid rgba(124,240,107,0.32); border-radius: 4px; padding: 4px 8px;">#1 acquisition channel among 10+</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8CA39C;">FIG · DIRECT-TO-CONSUMER · 2024–25</span>
+    </div>
+    <h1 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(34px, 5.5vw, 56px); line-height: 1.1; letter-spacing: -0.015em; margin: 0 0 24px; text-wrap: pretty;">Elevating direct-to-consumer to Fig's top acquisition channel</h1>
+    <p style="font-size: 19px; line-height: 1.6; color: #AFB8AC; max-width: 56ch; margin: 0; text-wrap: pretty;">Fig's growth was constrained by reliance on partners. I led the redesign and rebrand of fig.ca so users could learn about Fig, build trust, and book loans directly.</p>
+    <div style="display: flex; gap: 32px; flex-wrap: wrap; margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(247,247,235,0.13);">
+      <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8CA39C; margin-bottom: 4px;">TIMELINE</div><div style="font-size: 15px;">Phase I Apr 2024, Phase II Jan 2025</div></div>
+      <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8CA39C; margin-bottom: 4px;">ROLE</div><div style="font-size: 15px;">Lead designer</div></div>
+      <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8CA39C; margin-bottom: 4px;">TEAM</div><div style="font-size: 15px;">Director of Product, Engineers, Marketing, Branding consultant</div></div>
+      <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8CA39C; margin-bottom: 4px;">STATUS</div><div style="font-size: 15px;">Launched · <a href="https://fig.ca/" target="_blank">View live ↗</a></div></div>
+    </div>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 0 24px 40px;">
+    <div style="border-radius: 12px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);">
+      <img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/67ce1b182cdad1bd1a302d6f_cover%20new2.jpg" alt="fig.ca direct-to-consumer redesign cover" style="width: 100%; display: block;">
+    </div>
+  </section>
+
+  <!-- Problem / Outcome -->
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">01 · The problem</div>
+    <h2 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">Growth was capped by partner reliance</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #D8DCCE; max-width: 62ch; margin: 0;">As an innovative digital lender, Fig's growth had been constrained by its reliance on partners. Fig was launching a direct-to-consumer channel to unlock a new growth path — but the existing site didn't give users a reason to trust Fig, or an easy way to book a loan on their own.</p>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">02 · The outcome</div>
+    <h2 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">A refreshed site that builds trust and books loans</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #D8DCCE; max-width: 62ch; margin: 0 0 24px;">A refreshed website made it simple for users to learn about Fig, build trust, and book loans directly — no partner in the loop.</p>
+    <div style="border-radius: 12px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);">
+      <img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/68cdd2d931dd5a0f3096453a_before%20after%202%20(4).jpg" alt="fig.ca before and after redesign comparison" style="width: 100%; display: block;">
+    </div>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">03 · The impact</div>
+    <h2 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 24px; text-wrap: pretty;">DTC quickly became the #1 acquisition channel — among 10+</h2>
+    <div style="border-radius: 12px; border: 1px solid rgba(247,247,235,0.13); background: #0B352E; padding: 28px 28px 20px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8CA39C; letter-spacing: 0.06em; margin-bottom: 20px;">WEEKLY FUNDED LOAN VOLUME · ALL CHANNELS</div>
+      <div style="position: relative; height: 260px; display: flex; align-items: flex-end; gap: 8px; padding-left: 52px;">
+        <div style="position: absolute; left: 52px; top: 0; height: 100%; width: calc(100% - 52px); display: flex; flex-direction: column; justify-content: space-between; pointer-events: none;">
+          <div style="border-top: 1px dashed rgba(247,247,235,0.13); position: relative;"><span style="position: absolute; left: -48px; top: -7px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8CA39C; width: 42px; text-align: right;">4,000</span></div>
+          <div style="border-top: 1px dashed rgba(247,247,235,0.13); position: relative;"><span style="position: absolute; left: -48px; top: -7px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8CA39C; width: 42px; text-align: right;">3,000</span></div>
+          <div style="border-top: 1px dashed rgba(247,247,235,0.13); position: relative;"><span style="position: absolute; left: -48px; top: -7px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8CA39C; width: 42px; text-align: right;">2,000</span></div>
+          <div style="border-top: 1px dashed rgba(247,247,235,0.13); position: relative;"><span style="position: absolute; left: -48px; top: -7px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8CA39C; width: 42px; text-align: right;">1,000</span></div>
+          <div style="border-top: 1px solid rgba(247,247,235,0.13); position: relative;"><span style="position: absolute; left: -48px; top: -7px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8CA39C; width: 42px; text-align: right;">0</span></div>
+        </div>
+        <div style="display: flex; align-items: flex-end; gap: 8px; width: 100%; height: 100%; position: relative; z-index: 1;">
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #AFB8AC; margin-bottom: 4px;">2,351</span><div style="width: 100%; height: 58.8%; background: #D8D4C8; border-radius: 3px 3px 0 0;"></div></div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #AFB8AC; margin-bottom: 4px;">2,091</span><div style="width: 100%; height: 52.3%; background: #D8D4C8; border-radius: 3px 3px 0 0;"></div></div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #AFB8AC; margin-bottom: 4px;">1,983</span><div style="width: 100%; height: 49.6%; background: #D8D4C8; border-radius: 3px 3px 0 0;"></div></div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #AFB8AC; margin-bottom: 4px;">2,563</span><div style="width: 100%; height: 64.1%; background: #D8D4C8; border-radius: 3px 3px 0 0;"></div></div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #AFB8AC; margin-bottom: 4px;">2,338</span><div style="width: 100%; height: 58.5%; background: #D8D4C8; border-radius: 3px 3px 0 0;"></div></div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #AFB8AC; margin-bottom: 4px;">2,172</span><div style="width: 100%; height: 54.3%; background: #D8D4C8; border-radius: 3px 3px 0 0;"></div></div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #AFB8AC; margin-bottom: 4px;">2,397</span><div style="width: 100%; height: 59.9%; background: #D8D4C8; border-radius: 3px 3px 0 0;"></div></div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #7CF06B; font-weight: 500; margin-bottom: 4px;">3,285</span><div style="width: 100%; height: 82.1%; background: #7CF06B; border-radius: 3px 3px 0 0;"></div></div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #AFB8AC; margin-bottom: 4px;">2,558</span><div style="width: 100%; height: 64%; background: #D8D4C8; border-radius: 3px 3px 0 0;"></div></div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #AFB8AC; margin-bottom: 4px;">2,911</span><div style="width: 100%; height: 72.8%; background: #D8D4C8; border-radius: 3px 3px 0 0;"></div></div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #7CF06B; font-weight: 500; margin-bottom: 4px;">3,841</span><div style="width: 100%; height: 96%; background: #7CF06B; border-radius: 3px 3px 0 0;"></div></div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #AFB8AC; margin-bottom: 4px;">2,892</span><div style="width: 100%; height: 72.3%; background: #D8D4C8; border-radius: 3px 3px 0 0;"></div></div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #AFB8AC; margin-bottom: 4px;">2,466</span><div style="width: 100%; height: 61.7%; background: #D8D4C8; border-radius: 3px 3px 0 0;"></div></div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #7CF06B; font-weight: 500; margin-bottom: 4px;">3,162</span><div style="width: 100%; height: 79.1%; background: #7CF06B; border-radius: 3px 3px 0 0;"></div></div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #AFB8AC; margin-bottom: 4px;">2,709</span><div style="width: 100%; height: 67.7%; background: #D8D4C8; border-radius: 3px 3px 0 0;"></div></div>
+        </div>
+      </div>
+      <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(247,247,235,0.08); font-size: 13px; color: #AFB8AC;">Weekly totals across 10+ acquisition channels; weeks where DTC ranked #1 are highlighted in orange.</div>
+    </div>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">04 · The design challenge</div>
+    <h2 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">Differentiating Fig, and building trust as a new company</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #D8DCCE; max-width: 62ch; margin: 0 0 24px;">I brought together members from different teams for a brainstorming session to generate ideas and align on content strategy — mapping Fig against competitors on strength, tone, and value.</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 24px;">
+      <div style="background: #0B352E; border: 1px solid rgba(247,247,235,0.13); border-radius: 10px; padding: 20px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8CA39C; margin-bottom: 8px;">STRENGTH</div>
+        <div style="font-size: 14px; color: #D8DCCE;">Fig: quick &amp; easy online process. Competitor: manual &amp; long process.</div>
+      </div>
+      <div style="background: #0B352E; border: 1px solid rgba(247,247,235,0.13); border-radius: 10px; padding: 20px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8CA39C; margin-bottom: 8px;">TONE</div>
+        <div style="font-size: 14px; color: #D8DCCE;">Fig: transparent. Competitor: black box.</div>
+      </div>
+      <div style="background: #0B352E; border: 1px solid rgba(247,247,235,0.13); border-radius: 10px; padding: 20px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8CA39C; margin-bottom: 8px;">VALUE</div>
+        <div style="font-size: 14px; color: #D8DCCE;">Fig: people helping people. Competitor: keep people indebted.</div>
+      </div>
+    </div>
+    <div style="border-radius: 12px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);">
+      <img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/670f0053cabf0942bee673cc_66ff2dc32cef8a57248fba60_Screen%20Shot%202024-10-03%20at%207.49.03%20PM.png" alt="Fig vs competitor positioning brainstorm" style="width: 100%; display: block;">
+    </div>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">05 · The process</div>
+    <h2 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">End to end: research, content strategy, branding, handoff</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #D8DCCE; max-width: 62ch; margin: 0 0 24px;">I led the process from research through content strategy and branding to engineering handoff.</p>
+    <div style="border-radius: 12px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);">
+      <img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/674133ee536d262fe69d400a_research.jpg" alt="Research process artifacts" style="width: 100%; display: block;">
+    </div>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">06 · The re-brand</div>
+    <h2 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">As a challenging brand, we couldn't afford to be generic</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #D8DCCE; max-width: 62ch; margin: 0 0 24px;">At the end of the design phase, I collaborated with the growth team to refine Fig's branding strategy, focusing on a memorable identity through color and mascot.</p>
+    <div style="border-radius: 12px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);">
+      <img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/68cddcae37e867e77556c4ce_Frame%2010121121%20(1).jpg" alt="Fig re-brand: color and mascot identity" style="width: 100%; display: block;">
+    </div>
+  </section>
+
+  <footer style="border-top: 1px solid rgba(247,247,235,0.08); background: #052220;">
+    <div style="max-width: 800px; margin: 0 auto; padding: 40px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <a href="index.html" style="font-family: 'Instrument Sans', sans-serif; font-size: 14px;">← Back to all work</a>
+      <a href="payment-protection.html" style="font-family: 'Instrument Sans', sans-serif; font-size: 14px;">Next: Payment protection opt-in →</a>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { theme: "dark" };
+
+  async _loadTheme() {
+    this._themeMod = await import("./theme-swap.js");
+    const theme = this._themeMod.readTheme("qz-portfolio-theme");
+    this.setState({ theme }, () => this._themeMod.applyTheme(theme));
+  }
+
+  _toggleTheme = () => {
+    const next = this.state.theme === "light" ? "dark" : "light";
+    this.setState({ theme: next }, () => {
+      if (this._themeMod) {
+        this._themeMod.applyTheme(next);
+        this._themeMod.saveTheme("qz-portfolio-theme", next);
+      }
+    });
+  };
+
+  componentDidMount() { this._loadTheme(); }
+
+  componentDidUpdate() { if (this._themeMod && this.state.theme === "light") this._themeMod.applyTheme("light"); }
+
+  renderVals() {
+    return {
+      isLight: this.state.theme === "light",
+      isDark: this.state.theme !== "light",
+      toggleTheme: this._toggleTheme,
+    };
+  }
+}
+</script>
+</body>
+</html>

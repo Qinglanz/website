@@ -12,286 +12,277 @@
 <meta name="description" content="Qinglan Zheng is a Toronto-based senior product designer at Fig who designs fintech lending experiences and builds design-to-code workflows with AI.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;family=Instrument+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>
-  html, body { margin: 0; padding: 0; background: #FAF9F6; color: #16150F; font-family: Inter, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
-  a { color: #B5501F; text-decoration: none; }
-  a:hover { color: #8A3C15; text-decoration: underline; text-underline-offset: 3px; }
-  ::selection { background: #B5501F; color: #FAF9F6; }
+  html, body { margin: 0; padding: 0; background: #072A24; color: #F7F7EB; font-family: 'Instrument Sans', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #7CF06B; text-decoration: none; }
+  a:hover { color: #A8FA9C; text-decoration: underline; text-underline-offset: 3px; }
+  ::selection { background: #7CF06B; color: #072A24; }
+  @keyframes tickerRun { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes riseIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes barGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(0.82); } }
+
+  [data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity 0.7s cubic-bezier(0.2,0.7,0.2,1), transform 0.7s cubic-bezier(0.2,0.7,0.2,1); }
+  [data-reveal].is-in { opacity: 1; transform: none; }
+  img { transition: transform 0.4s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.4s ease; }
+  img:hover { transform: translateY(-4px) scale(1.006); box-shadow: 0 22px 60px -30px rgba(124,240,107,0.45); }
 </style>
-<script src="./image-slot.js"></script>
+<script>
+  (function () {
+    var run = function () {
+      var host = document.querySelector('x-dc') || document.body;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+      host.querySelectorAll('section, figure, footer').forEach(function (el, i) {
+        if (i === 0) return;
+        el.setAttribute('data-reveal', '');
+        el.style.transitionDelay = Math.min(i % 3, 2) * 70 + 'ms';
+        io.observe(el);
+      });
+    };
+    if (document.readyState === 'complete' || document.readyState === 'interactive') setTimeout(run, 400);
+    else window.addEventListener('DOMContentLoaded', function () { setTimeout(run, 400); });
+  })();
+</script>
 </helmet>
 
-<div style="min-height: 100vh; background: #FAF9F6;">
-  <!-- Nav -->
-  <header style="max-width: 1120px; margin: 0 auto; padding: 28px 24px 0; display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
-    <a href="#" style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; color: #16150F; letter-spacing: 0.02em;">qinglan.zheng</a>
-    <nav style="display: flex; gap: 28px; align-items: baseline;">
-      <a href="#work" style="font-size: 14px; color: #16150F;">Work</a>
-      <a href="About.dc.html" style="font-size: 14px; color: #16150F;">About</a>
-      <a href="mailto:qinglandesign@gmail.com" style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F;">qinglandesign@gmail.com</a>
+<div style="min-height: 100vh; background: radial-gradient(1200px 620px at 12% -8%, rgba(56,140,48,0.42), transparent 62%), #072A24;">
+  <header style="max-width: 1160px; margin: 0 auto; padding: 26px 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <a href="#" style="display: flex; align-items: center; gap: 9px; font-family: 'Instrument Sans', sans-serif; font-size: 14px; font-weight: 500; color: #F7F7EB; letter-spacing: 0.02em;">
+      <span style="width: 8px; height: 8px; border-radius: 50%; background: #7CF06B; box-shadow: 0 0 12px rgba(124,240,107,0.8); animation: pulseDot 2.4s ease-in-out infinite;"></span>qinglan.zheng
+    </a>
+    <nav style="display: flex; gap: 26px; align-items: center;">
+      <a href="#work" style="font-size: 14px; color: #F7F7EB;">Work</a>
+      <a href="about.html" style="font-size: 14px; color: #F7F7EB;">About</a>
+      <a href="mailto:qinglandesign@gmail.com" style="font-family: 'Instrument Sans', sans-serif; font-size: 13px; color: #04231D; background: #7CF06B; border-radius: 999px; padding: 9px 16px; font-weight: 500;" style-hover="background: #A8FA9C; text-decoration: none;">Get in touch</a>
+      <button type="button" onClick="{{ toggleTheme }}" aria-label="Toggle light and dark mode" style="display: inline-flex; align-items: center; justify-content: center; color: #F7F7EB; background: rgba(247,247,235,0.06); border: 1px solid rgba(247,247,235,0.16); border-radius: 999px; width: 34px; height: 34px; padding: 0; cursor: pointer;" style-hover="border-color: #7CF06B; color: #7CF06B;">
+        <sc-if value="{{ isDark }}" hint-placeholder-val="{{ true }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"></path></svg></sc-if>
+        <sc-if value="{{ isLight }}" hint-placeholder-val="{{ false }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"></path></svg></sc-if>
+      </button>
     </nav>
   </header>
 
-  <!-- Hero -->
-  <section style="max-width: 1120px; margin: 0 auto; padding: clamp(72px, 12vw, 140px) 24px clamp(56px, 8vw, 96px);">
-    <sc-if value="{{ showAvailability }}" hint-placeholder-val="{{ true }}">
-      
-    </sc-if>
-    <h1 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(40px, 6.5vw, 76px); line-height: 1.05; letter-spacing: -0.015em; margin: 0 0 28px; max-width: 15ch; text-wrap: pretty;">I’m Qinglan — a senior product designer who ships code.</h1>
-    <p style="font-size: clamp(17px, 2vw, 21px); line-height: 1.55; color: #55534B; max-width: 52ch; margin: 0 0 40px; text-wrap: pretty;">I design lending experiences at <a href="https://fig.ca" style="color: #16150F; text-decoration: underline; text-decoration-color: #C9C6BD; text-underline-offset: 4px;">Fig</a>, and I use AI as a working tool — shipping UI as draft PRs, and reading thousands of user messages a month for research. Small improvements that took weeks now ship in days.</p>
-    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-      <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #16150F; background: #F1EFE9; border: 1px solid #E4E1D8; border-radius: 6px; padding: 8px 14px;">Merged PRs in production</span>
-      <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #16150F; background: #F1EFE9; border: 1px solid #E4E1D8; border-radius: 6px; padding: 8px 14px;">300% YoY growth at Fig</span>
-      <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #16150F; background: #F1EFE9; border: 1px solid #E4E1D8; border-radius: 6px; padding: 8px 14px;">AI-assisted research pipeline</span>
-      
+  <section style="max-width: 1160px; margin: 0 auto; padding: clamp(64px, 11vw, 128px) 24px clamp(40px, 6vw, 64px);">
+    <div style="display: inline-flex; align-items: center; gap: 9px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #7CF06B; border: 1px solid rgba(124,240,107,0.42); background: rgba(124,240,107,0.16); border-radius: 999px; padding: 7px 14px; margin-bottom: 30px; animation: riseIn 0.6s ease both;">Fintech · Toronto · Senior product designer</div>
+    <h1 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(40px, 6.6vw, 78px); line-height: 1.02; letter-spacing: -0.03em; margin: 0 0 28px; max-width: 17ch; text-wrap: pretty; animation: riseIn 0.7s ease both;">I’m Qinglan — a senior product designer who ships code.</h1>
+    <p style="font-size: clamp(17px, 2vw, 21px); line-height: 1.55; color: #AFB8AC; max-width: 54ch; margin: 0 0 44px; text-wrap: pretty; animation: riseIn 0.8s ease both;">Today I design lending experiences at <a href="https://fig.ca" style="color: #F7F7EB; text-decoration: underline; text-decoration-color: rgba(247,247,235,0.3); text-underline-offset: 4px;">Fig</a> in Toronto — and increasingly ship them as code. My time is split between Fig’s lending funnel and Project Uno, a new everyday bank account.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: rgba(247,247,235,0.10); border: 1px solid rgba(247,247,235,0.10); border-radius: 14px; overflow: hidden; animation: riseIn 0.9s ease both;">
+      <div style="background: #0B352E; padding: 26px 24px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #7CF06B;">Data-driven</div>
+        <p style="font-size: 15px; line-height: 1.6; color: #D8DCCE; margin: 0;">I write my own funnel SQL, so the numbers — not opinions — decide which problem is next.</p>
+      </div>
+      <div style="background: #0B352E; padding: 26px 24px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #7CF06B;">AI-pilled</div>
+        <p style="font-size: 15px; line-height: 1.6; color: #D8DCCE; margin: 0;">Research pipelines, prototypes, and production PRs. AI is how I work, not a demo.</p>
+      </div>
+      <div style="background: #0B352E; padding: 26px 24px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #7CF06B;">Growth-oriented</div>
+        <p style="font-size: 15px; line-height: 1.6; color: #D8DCCE; margin: 0;">Conversion is the brief: I find the lift worth chasing, write the pitch, and run the bet as DRI.</p>
+      </div>
     </div>
   </section>
 
-  <!-- Featured work -->
-  <section id="work" style="max-width: 1120px; margin: 0 auto; padding: 0 24px clamp(64px, 8vw, 112px);">
-    <div style="display: flex; align-items: baseline; justify-content: space-between; border-top: 1px solid #E4E1D8; padding: 20px 0 40px;">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #55534B; letter-spacing: 0.08em; text-transform: uppercase; margin: 0;">Selected work</h2>
-      <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #8B887E;">2019 — 2026</span>
+  <div style="border-top: 1px solid rgba(247,247,235,0.08); border-bottom: 1px solid rgba(247,247,235,0.08); background: #052220; overflow: hidden; padding: 15px 0;">
+    <div style="display: flex; width: max-content; animation: tickerRun 34s linear infinite;">
+      <div style="display: flex; gap: 40px; padding-right: 40px; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; color: #95AAA3; white-space: nowrap;">
+        <span>Merged PRs in production</span><span style="color: #7CF06B;">◆</span>
+        <span>AI-assisted research pipeline</span><span style="color: #7CF06B;">◆</span>
+        <span>14-step regulated flow, end to end</span><span style="color: #7CF06B;">◆</span>
+        <span>Figma MCP · Cursor · Storybook</span><span style="color: #7CF06B;">◆</span>
+        <span>Booking conversion above 40%</span><span style="color: #7CF06B;">◆</span>
+        <span>Renewals convert above 70%</span><span style="color: #7CF06B;">◆</span>
+      </div>
+      <div style="display: flex; gap: 40px; padding-right: 40px; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; color: #95AAA3; white-space: nowrap;">
+        <span>Merged PRs in production</span><span style="color: #7CF06B;">◆</span>
+        <span>AI-assisted research pipeline</span><span style="color: #7CF06B;">◆</span>
+        <span>14-step regulated flow, end to end</span><span style="color: #7CF06B;">◆</span>
+        <span>Figma MCP · Cursor · Storybook</span><span style="color: #7CF06B;">◆</span>
+        <span>Booking conversion above 40%</span><span style="color: #7CF06B;">◆</span>
+        <span>Renewals convert above 70%</span><span style="color: #7CF06B;">◆</span>
+      </div>
+    </div>
+  </div>
+
+  <section id="work" style="max-width: 1160px; margin: 0 auto; padding: clamp(56px, 8vw, 96px) 24px clamp(64px, 8vw, 112px);">
+    <div style="display: flex; align-items: baseline; justify-content: space-between; padding-bottom: 36px;">
+      <h2 style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; color: #9AA79F; letter-spacing: 0.1em; text-transform: uppercase; margin: 0;">Selected work</h2>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8CA39C;">2019 — 2026</span>
     </div>
 
-    <!-- Flagship card -->
-    <a href="CaseStudy-DesignInCode.dc.html" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(24px, 4vw, 56px); align-items: center; background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 14px; padding: clamp(28px, 4vw, 48px); margin-bottom: 24px; color: #16150F; transition: border-color 0.2s ease, box-shadow 0.2s ease;" style-hover="border-color: #B5501F; box-shadow: 0 2px 24px rgba(14,90,82,0.08); text-decoration: none;">
+    <a href="design-in-code.html" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(24px, 4vw, 56px); align-items: center; background: linear-gradient(150deg, #104036 0%, #0A2E28 100%); border: 1px solid rgba(124,240,107,0.18); border-radius: 18px; padding: clamp(28px, 4vw, 48px); margin-bottom: 22px; color: #F7F7EB; transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;" style-hover="border-color: rgba(124,240,107,0.55); box-shadow: 0 18px 60px -24px rgba(124,240,107,0.4); transform: translateY(-3px); text-decoration: none;">
       <div>
-        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px; flex-wrap: wrap;">
-          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; border: 1px solid #EAD3C2; border-radius: 4px; padding: 4px 8px;">weeks → days</span>
-          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E;">FLAGSHIP · FIG · 2026</span>
+        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 22px; flex-wrap: wrap;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #04231D; background: #7CF06B; border-radius: 999px; padding: 5px 11px; font-weight: 500;">weeks → days</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #95AAA3; letter-spacing: 0.06em;">FLAGSHIP · FIG · 2026</span>
         </div>
-        <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(26px, 3.2vw, 38px); line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 16px; text-wrap: pretty;">From weeks to days: building a design-in-code workflow at Fig</h3>
-        <p style="font-size: 16px; line-height: 1.6; color: #55534B; margin: 0 0 24px; max-width: 46ch;">I pitched a two-week pilot, wired Figma and Claude into our codebase, and now ship UI changes as draft PRs — with engineering review intact.</p>
-        <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F;">Read the case study →</span>
+        <h3 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(26px, 3.3vw, 40px); line-height: 1.1; letter-spacing: -0.025em; margin: 0 0 16px; text-wrap: pretty;">From weeks to days: building a design-in-code workflow at Fig</h3>
+        <p style="font-size: 16px; line-height: 1.62; color: #9AA79F; margin: 0 0 26px; max-width: 46ch;">I pitched a two-week pilot, wired Figma and Claude into our codebase, and now ship UI changes as draft PRs — with engineering review intact.</p>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #7CF06B;">Read the case study →</span>
       </div>
-      <div style="aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; border: 1px solid #E4E1D8;">
+      <div style="aspect-ratio: 4 / 3; border-radius: 12px; overflow: hidden; border: 1px solid rgba(247,247,235,0.12);">
         <img src="uploads/design-playground-cropped.png" alt="The Design Playground: a production loan-amount step running with mock data, next to a Design Playground panel listing every Prequal, Origination, Portal, and Chat screen" style="width: 100%; height: 100%; object-fit: cover; display: block;">
       </div>
     </a>
 
-    <!-- Second featured card -->
-    <a href="CaseStudy-LoanOrigination.dc.html" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(24px, 4vw, 56px); align-items: center; background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 14px; padding: clamp(28px, 4vw, 48px); margin-bottom: 24px; color: #16150F; transition: border-color 0.2s ease, box-shadow 0.2s ease;" style-hover="border-color: #B5501F; box-shadow: 0 2px 24px rgba(14,90,82,0.08); text-decoration: none;">
-      <div style="aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; border: 1px solid #E4E1D8;">
+    <a href="loan-origination.html" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(24px, 4vw, 56px); align-items: center; background: #0B352E; border: 1px solid rgba(247,247,235,0.10); border-radius: 18px; padding: clamp(28px, 4vw, 48px); margin-bottom: 22px; color: #F7F7EB; transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;" style-hover="border-color: rgba(124,240,107,0.45); box-shadow: 0 18px 60px -24px rgba(124,240,107,0.3); transform: translateY(-3px); text-decoration: none;">
+      <div style="aspect-ratio: 4 / 3; border-radius: 12px; overflow: hidden; border: 1px solid rgba(247,247,235,0.12);">
         <img src="uploads/c71eb413-1fb8-4544-8e06-15d8f0857591.png" alt="Origination redesign: selected screens from pre-qualified offer through booking success" style="width: 100%; height: 100%; object-fit: cover; display: block;">
       </div>
       <div>
-        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px; flex-wrap: wrap;">
-          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; border: 1px solid #EAD3C2; border-radius: 4px; padding: 4px 8px;">14 steps · end to end</span>
-          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E;">FIG · 2024–26</span>
+        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 22px; flex-wrap: wrap;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; border: 1px solid rgba(124,240,107,0.3); border-radius: 999px; padding: 5px 11px;">14 steps · end to end</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #95AAA3; letter-spacing: 0.06em;">FIG · 2024–26</span>
         </div>
-        <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(26px, 3.2vw, 38px); line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 16px; text-wrap: pretty;">Redesigning loan origination: a regulated lending flow end to end</h3>
-        <p style="font-size: 16px; line-height: 1.6; color: #55534B; margin: 0 0 24px; max-width: 46ch;">From prequalification to booking — designing for trust at the exact moments people abandon, with priorities set by my own SQL on funnel drop-off.</p>
-        <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F;">Read the case study →</span>
+        <h3 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(26px, 3.3vw, 40px); line-height: 1.1; letter-spacing: -0.025em; margin: 0 0 16px; text-wrap: pretty;">Redesigning loan origination: a regulated lending flow end to end</h3>
+        <p style="font-size: 16px; line-height: 1.62; color: #9AA79F; margin: 0 0 26px; max-width: 46ch;">From prequalification to booking — designing for trust at the exact moments people abandon, with priorities set by my own SQL on funnel drop-off.</p>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #7CF06B;">Read the case study →</span>
       </div>
     </a>
 
-    <!-- Third featured card -->
-    <a href="CaseStudy-InsightEngine.dc.html" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(24px, 4vw, 56px); align-items: center; background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 14px; padding: clamp(28px, 4vw, 48px); margin-bottom: 24px; color: #16150F; transition: border-color 0.2s ease, box-shadow 0.2s ease;" style-hover="border-color: #B5501F; box-shadow: 0 2px 24px rgba(14,90,82,0.08); text-decoration: none;">
+    <a href="insight-engine.html" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(24px, 4vw, 56px); align-items: center; background: #0B352E; border: 1px solid rgba(247,247,235,0.10); border-radius: 18px; padding: clamp(28px, 4vw, 48px); margin-bottom: 22px; color: #F7F7EB; transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;" style-hover="border-color: rgba(124,240,107,0.45); box-shadow: 0 18px 60px -24px rgba(124,240,107,0.3); transform: translateY(-3px); text-decoration: none;">
       <div>
-        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px; flex-wrap: wrap;">
-          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; border: 1px solid #EAD3C2; border-radius: 4px; padding: 4px 8px;">AI-assisted · 3 signal streams</span>
-          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E;">FIG · RESEARCH &amp; STRATEGY · 2025–26</span>
+        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 22px; flex-wrap: wrap;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; border: 1px solid rgba(124,240,107,0.3); border-radius: 999px; padding: 5px 11px;">AI-assisted · 3 signal streams</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #95AAA3; letter-spacing: 0.06em;">FIG · RESEARCH · 2025–26</span>
         </div>
-        <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(26px, 3.2vw, 38px); line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 16px; text-wrap: pretty;">The Insight Engine: turning every user signal into a monthly research pipeline</h3>
-        <p style="font-size: 16px; line-height: 1.6; color: #55534B; margin: 0 0 24px; max-width: 46ch;">SMS replies, support tickets, and chatbot logs — read at scale by Claude every month against my own coding frame, cross-referenced against my own funnel SQL, and turned into pitches that become funded bets.</p>
-        <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B5501F;">Read the case study →</span>
+        <h3 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(26px, 3.3vw, 40px); line-height: 1.1; letter-spacing: -0.025em; margin: 0 0 16px; text-wrap: pretty;">The Insight Engine: turning every user signal into a monthly research pipeline</h3>
+        <p style="font-size: 16px; line-height: 1.62; color: #9AA79F; margin: 0 0 26px; max-width: 46ch;">SMS replies, support tickets, and chatbot logs — read at scale by Claude every month against my own coding frame, cross-referenced against my funnel SQL, and turned into pitches that become funded bets.</p>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #7CF06B;">Read the case study →</span>
       </div>
-      <div style="position: relative; aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; border: 1px solid #E4E1D8; background: linear-gradient(160deg, #F5F3EE 0%, #EFECE4 100%); display: flex; align-items: center; justify-content: center;">
-        <div style="position: absolute; inset: 0; opacity: 0.5; background-image: radial-gradient(#DDD9CE 1px, transparent 1px); background-size: 16px 16px;"></div>
-        <div style="position: absolute; left: 50%; top: 50%; width: 78%; height: 60%; transform: translate(-50%, -50%); background: radial-gradient(ellipse at center, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 70%);"></div>
-        <div style="position: relative; width: 100%; padding: 0 20px; box-sizing: border-box;">
-        <div style="position: relative; display: flex; justify-content: center; align-items: flex-end; gap: 0;">
-          <div style="position: relative; width: 23%; min-width: 62px; height: 158px; background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 8px; overflow: hidden; box-shadow: 0 12px 28px -12px rgba(22,21,15,0.32); transform: rotate(-7deg) translateY(16px); z-index: 1;">
-            <div style="position: absolute; inset: 0; padding: 10px 9px; display: flex; flex-direction: column;">
-              <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #E4E1D8; padding-bottom: 6px; margin-bottom: 10px;">
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 6px; color: #B5501F; letter-spacing: 0.13em;">SMS DROP-OFF</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 5px; color: #A9A79D; letter-spacing: 0.08em;">FEB–APR 26</div>
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 5px;">
-                <div style="display: flex; flex-direction: column; gap: 3px;">
-                  <div style="display: flex; gap: 4px; align-items: center;"><div style="height: 3px; border-radius: 2px; width: 52%; background: #DDD9CE;"></div></div>
-                  <div style="height: 4px; border-radius: 2px; background: #EFEDE6; overflow: hidden;"><div style="height: 100%; width: 88%; border-radius: 2px; background: #B5501F;"></div></div>
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 3px;">
-                  <div style="display: flex; gap: 4px; align-items: center;"><div style="height: 3px; border-radius: 2px; width: 52%; background: #DDD9CE;"></div></div>
-                  <div style="height: 4px; border-radius: 2px; background: #EFEDE6; overflow: hidden;"><div style="height: 100%; width: 62%; border-radius: 2px; background: #B5501F;"></div></div>
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 3px;">
-                  <div style="display: flex; gap: 4px; align-items: center;"><div style="height: 3px; border-radius: 2px; width: 38%; background: #DDD9CE;"></div></div>
-                  <div style="height: 4px; border-radius: 2px; background: #EFEDE6; overflow: hidden;"><div style="height: 100%; width: 41%; border-radius: 2px; background: rgba(181,80,31,0.38);"></div></div>
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 3px;">
-                  <div style="display: flex; gap: 4px; align-items: center;"><div style="height: 3px; border-radius: 2px; width: 38%; background: #DDD9CE;"></div></div>
-                  <div style="height: 4px; border-radius: 2px; background: #EFEDE6; overflow: hidden;"><div style="height: 100%; width: 27%; border-radius: 2px; background: rgba(181,80,31,0.38);"></div></div>
-                </div></div>
-              <div style="margin-top: 10px; border-left: 2px solid #EAD3C2; padding-left: 5px; display: flex; flex-direction: column; gap: 3px;"><div style="height: 3px; border-radius: 2px; width: 92%; background: #EFEDE6;"></div><div style="height: 3px; border-radius: 2px; width: 76%; background: #EFEDE6;"></div><div style="height: 3px; border-radius: 2px; width: 58%; background: #EFEDE6;"></div></div>
-              <div style="margin-top: auto; padding-top: 9px; border-top: 1px solid #EFEDE6;">
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #16150F; line-height: 1;">~1,000</div>
-                <div style="font-size: 5.5px; color: #8B887E; margin-top: 3px;">replies / month</div>
-              </div>
-            </div>
-          </div>
-          <div style="position: relative; width: 26%; min-width: 70px; height: 184px; background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 9px; overflow: hidden; box-shadow: 0 16px 34px -14px rgba(22,21,15,0.34); transform: rotate(-2.5deg) translateY(-6px); z-index: 2;">
-            <div style="position: absolute; inset: 0; padding: 10px 9px; display: flex; flex-direction: column;">
-              <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #E4E1D8; padding-bottom: 6px; margin-bottom: 10px;">
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 6px; color: #B5501F; letter-spacing: 0.13em;">TICKET ANALYSIS</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 5px; color: #A9A79D; letter-spacing: 0.08em;">MONTHLY</div>
-              </div>
-              <div style="display: flex; align-items: flex-end; gap: 4px; height: 30px; margin-bottom: 9px;">
-                <div style="flex: 1; height: 100%; background: #B5501F; border-radius: 2px 2px 0 0;"></div>
-                <div style="flex: 1; height: 78%; background: rgba(181,80,31,0.62); border-radius: 2px 2px 0 0;"></div>
-                <div style="flex: 1; height: 61%; background: rgba(181,80,31,0.45); border-radius: 2px 2px 0 0;"></div>
-                <div style="flex: 1; height: 44%; background: rgba(181,80,31,0.28); border-radius: 2px 2px 0 0;"></div>
-                <div style="flex: 1; height: 33%; background: #DDD9CE; border-radius: 2px 2px 0 0;"></div>
-                <div style="flex: 1; height: 21%; background: #DDD9CE; border-radius: 2px 2px 0 0;"></div>
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 5px;">
-                <div style="display: flex; flex-direction: column; gap: 3px;">
-                  <div style="display: flex; gap: 4px; align-items: center;"><div style="height: 3px; border-radius: 2px; width: 52%; background: #DDD9CE;"></div></div>
-                  <div style="height: 4px; border-radius: 2px; background: #EFEDE6; overflow: hidden;"><div style="height: 100%; width: 92%; border-radius: 2px; background: #B5501F;"></div></div>
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 3px;">
-                  <div style="display: flex; gap: 4px; align-items: center;"><div style="height: 3px; border-radius: 2px; width: 52%; background: #DDD9CE;"></div></div>
-                  <div style="height: 4px; border-radius: 2px; background: #EFEDE6; overflow: hidden;"><div style="height: 100%; width: 64%; border-radius: 2px; background: #B5501F;"></div></div>
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 3px;">
-                  <div style="display: flex; gap: 4px; align-items: center;"><div style="height: 3px; border-radius: 2px; width: 38%; background: #DDD9CE;"></div></div>
-                  <div style="height: 4px; border-radius: 2px; background: #EFEDE6; overflow: hidden;"><div style="height: 100%; width: 45%; border-radius: 2px; background: rgba(181,80,31,0.38);"></div></div>
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 3px;">
-                  <div style="display: flex; gap: 4px; align-items: center;"><div style="height: 3px; border-radius: 2px; width: 38%; background: #DDD9CE;"></div></div>
-                  <div style="height: 4px; border-radius: 2px; background: #EFEDE6; overflow: hidden;"><div style="height: 100%; width: 29%; border-radius: 2px; background: rgba(181,80,31,0.38);"></div></div>
-                </div></div>
-              <div style="margin-top: auto; padding-top: 9px; border-top: 1px solid #EFEDE6;">
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #16150F; line-height: 1;">~1,500</div>
-                <div style="font-size: 5.5px; color: #8B887E; margin-top: 3px;">tickets / month</div>
-              </div>
-            </div>
-          </div>
-          <div style="position: relative; width: 26%; min-width: 70px; height: 184px; background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 9px; overflow: hidden; box-shadow: 0 16px 34px -14px rgba(22,21,15,0.34); transform: rotate(2.5deg) translateY(-6px); z-index: 2;">
-            <div style="position: absolute; inset: 0; padding: 10px 9px; display: flex; flex-direction: column;">
-              <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #E4E1D8; padding-bottom: 6px; margin-bottom: 10px;">
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 6px; color: #B5501F; letter-spacing: 0.13em;">FIGGY CHAT</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 5px; color: #A9A79D; letter-spacing: 0.08em;">MONTHLY</div>
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px;">
-                <div style="width: 76%; background: #F2F0EA; border-radius: 7px 7px 7px 2px; padding: 5px 6px; display: flex; flex-direction: column; gap: 3px;"><div style="height: 3px; border-radius: 2px; width: 88%; background: #EFEDE6;"></div><div style="height: 3px; border-radius: 2px; width: 62%; background: #EFEDE6;"></div></div>
-                <div style="width: 64%; align-self: flex-end; background: rgba(181,80,31,0.85); border-radius: 7px 7px 2px 7px; padding: 5px 6px; display: flex; flex-direction: column; gap: 3px;"><div style="height: 3px; border-radius: 2px; width: 90%; background: rgba(255,255,255,0.65);"></div><div style="height: 3px; border-radius: 2px; width: 55%; background: rgba(255,255,255,0.4);"></div></div>
-                <div style="width: 58%; background: #F2F0EA; border-radius: 7px 7px 7px 2px; padding: 5px 6px; display: flex; flex-direction: column; gap: 3px;"><div style="height: 3px; border-radius: 2px; width: 80%; background: #EFEDE6;"></div></div>
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 5px;">
-                <div style="display: flex; flex-direction: column; gap: 3px;">
-                  <div style="display: flex; gap: 4px; align-items: center;"><div style="height: 3px; border-radius: 2px; width: 52%; background: #DDD9CE;"></div></div>
-                  <div style="height: 4px; border-radius: 2px; background: #EFEDE6; overflow: hidden;"><div style="height: 100%; width: 82%; border-radius: 2px; background: #B5501F;"></div></div>
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 3px;">
-                  <div style="display: flex; gap: 4px; align-items: center;"><div style="height: 3px; border-radius: 2px; width: 38%; background: #DDD9CE;"></div></div>
-                  <div style="height: 4px; border-radius: 2px; background: #EFEDE6; overflow: hidden;"><div style="height: 100%; width: 58%; border-radius: 2px; background: #B5501F;"></div></div>
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 3px;">
-                  <div style="display: flex; gap: 4px; align-items: center;"><div style="height: 3px; border-radius: 2px; width: 38%; background: #DDD9CE;"></div></div>
-                  <div style="height: 4px; border-radius: 2px; background: #EFEDE6; overflow: hidden;"><div style="height: 100%; width: 38%; border-radius: 2px; background: rgba(181,80,31,0.38);"></div></div>
-                </div></div>
-              <div style="margin-top: auto; padding-top: 9px; border-top: 1px solid #EFEDE6;">
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #16150F; line-height: 1;">~370</div>
-                <div style="font-size: 5.5px; color: #8B887E; margin-top: 3px;">conversations / month</div>
-              </div>
-            </div>
-          </div>
-          <div style="position: relative; width: 23%; min-width: 62px; height: 158px; background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 8px; overflow: hidden; box-shadow: 0 12px 28px -12px rgba(22,21,15,0.32); transform: rotate(7deg) translateY(16px); z-index: 1;">
-            <div style="position: absolute; inset: 0; padding: 10px 9px; display: flex; flex-direction: column;">
-              <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #E4E1D8; padding-bottom: 6px; margin-bottom: 10px;">
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 6px; color: #B5501F; letter-spacing: 0.13em;">FUNNEL MONITOR</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 5px; color: #A9A79D; letter-spacing: 0.08em;">MONTHLY</div>
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 6px;">
-                <div style="display: flex; align-items: center; gap: 6px;">
-                  <div style="width: 40%; display: flex;"><div style="height: 3px; border-radius: 2px; width: 70%; background: #DDD9CE;"></div></div>
-                  <div style="flex: 1; height: 5px; background: #EFEDE6; border-radius: 2px; overflow: hidden;"><div style="height: 100%; width: 100%; background: rgba(181,80,31,0.32);"></div></div>
-                </div>
-                <div style="display: flex; align-items: center; gap: 6px;">
-                  <div style="width: 40%; display: flex;"><div style="height: 3px; border-radius: 2px; width: 70%; background: #DDD9CE;"></div></div>
-                  <div style="flex: 1; height: 5px; background: #EFEDE6; border-radius: 2px; overflow: hidden;"><div style="height: 100%; width: 84%; background: rgba(181,80,31,0.32);"></div></div>
-                </div>
-                <div style="display: flex; align-items: center; gap: 6px;">
-                  <div style="width: 40%; display: flex;"><div style="height: 3px; border-radius: 2px; width: 70%; background: #DDD9CE;"></div></div>
-                  <div style="flex: 1; height: 5px; background: #EFEDE6; border-radius: 2px; overflow: hidden;"><div style="height: 100%; width: 66%; background: rgba(181,80,31,0.32);"></div></div>
-                </div>
-                <div style="display: flex; align-items: center; gap: 6px;">
-                  <div style="width: 40%; display: flex;"><div style="height: 3px; border-radius: 2px; width: 86%; background: #DDD9CE;"></div></div>
-                  <div style="flex: 1; height: 5px; background: #EFEDE6; border-radius: 2px; overflow: hidden;"><div style="height: 100%; width: 49%; background: #B5501F;"></div></div>
-                </div>
-                <div style="display: flex; align-items: center; gap: 6px;">
-                  <div style="width: 40%; display: flex;"><div style="height: 3px; border-radius: 2px; width: 86%; background: #DDD9CE;"></div></div>
-                  <div style="flex: 1; height: 5px; background: #EFEDE6; border-radius: 2px; overflow: hidden;"><div style="height: 100%; width: 34%; background: #B5501F;"></div></div>
-                </div>
-                <div style="display: flex; align-items: center; gap: 6px;">
-                  <div style="width: 40%; display: flex;"><div style="height: 3px; border-radius: 2px; width: 70%; background: #DDD9CE;"></div></div>
-                  <div style="flex: 1; height: 5px; background: #EFEDE6; border-radius: 2px; overflow: hidden;"><div style="height: 100%; width: 26%; background: rgba(181,80,31,0.32);"></div></div>
-                </div></div>
-              <div style="margin-top: auto; padding-top: 9px; border-top: 1px solid #EFEDE6;">
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #16150F; line-height: 1;">14 steps</div>
-                <div style="font-size: 5.5px; color: #8B887E; margin-top: 3px;">monitored monthly</div>
-              </div>
-            </div>
-          </div>
+      <div style="background: #052220; border: 1px solid rgba(247,247,235,0.10); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 12px; border-bottom: 1px solid rgba(247,247,235,0.08);">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #7CF06B;">SIGNAL STREAMS</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8CA39C;">MONTHLY</span>
         </div>
-        </div>
+        <sc-for list="{{ streams }}" as="row" hint-placeholder-count="4">
+          <div style="display: flex; flex-direction: column; gap: 7px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+              <span style="font-size: 13px; color: #D8DCCE;">{{ row.label }}</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #F7F7EB;">{{ row.value }}</span>
+            </div>
+            <div style="height: 6px; border-radius: 3px; background: rgba(247,247,235,0.08); overflow: hidden;">
+              <div style="height: 100%; width: {{ row.width }}; border-radius: 3px; background: linear-gradient(90deg, rgba(124,240,107,0.45), #7CF06B); transform-origin: left; animation: barGrow 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) both;"></div>
+            </div>
+          </div>
+        </sc-for>
       </div>
     </a>
 
-    <!-- Secondary cards -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 16px;">
-      <sc-for list="{{ secondaryCards }}" as="card" hint-placeholder-count="3">
-        <a href="{{ card.href }}" style="display: flex; flex-direction: column; gap: 14px; background: #FFFFFF; border: 1px solid #E4E1D8; border-radius: 14px; padding: 28px; color: #16150F; transition: border-color 0.2s ease, box-shadow 0.2s ease;" style-hover="border-color: #B5501F; box-shadow: 0 2px 24px rgba(14,90,82,0.08); text-decoration: none;">
-          <div style="aspect-ratio: 16 / 10; border-radius: 8px; overflow: hidden; border: 1px solid #E4E1D8; background: #F5F3EE;">
-            <img src="{{ card.img }}" alt="{{ card.imgAlt }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; margin-top: 16px;">
+      <sc-for list="{{ secondaryCards }}" as="card" hint-placeholder-count="6">
+        <a href="{{ card.href }}" style="display: flex; flex-direction: column; gap: 14px; background: #0B352E; border: 1px solid rgba(247,247,235,0.10); border-radius: 16px; padding: 26px; color: #F7F7EB; transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;" style-hover="border-color: rgba(124,240,107,0.45); box-shadow: 0 16px 46px -22px rgba(124,240,107,0.3); transform: translateY(-3px); text-decoration: none;">
+          <div style="aspect-ratio: 16 / 10; border-radius: 10px; overflow: hidden; border: 1px solid rgba(247,247,235,0.12); background: #052220;">
+            <img alt="{{ card.imgAlt }}" ref="{{ card.setImg }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
           </div>
-          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #B5501F; border: 1px solid #EAD3C2; border-radius: 4px; padding: 4px 8px; align-self: flex-start;">{{ card.metric }}</span>
-          <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 22px; line-height: 1.25; margin: 0; text-wrap: pretty;">{{ card.title }}</h3>
-          <p style="font-size: 14px; line-height: 1.55; color: #55534B; margin: 0;">{{ card.blurb }}</p>
-          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin-top: auto;">{{ card.tag }}</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; border: 1px solid rgba(124,240,107,0.3); border-radius: 999px; padding: 4px 10px; align-self: flex-start;">{{ card.metric }}</span>
+          <h3 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 21px; line-height: 1.22; letter-spacing: -0.02em; margin: 0; text-wrap: pretty;">{{ card.title }}</h3>
+          <p style="font-size: 14px; line-height: 1.55; color: #9AA79F; margin: 0;">{{ card.blurb }}</p>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8CA39C; margin-top: auto; letter-spacing: 0.06em;">{{ card.tag }}</span>
         </a>
       </sc-for>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer style="border-top: 1px solid #E4E1D8; background: #F5F3EE;">
-    <div style="max-width: 1120px; margin: 0 auto; padding: clamp(48px, 6vw, 72px) 24px; display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; flex-wrap: wrap;">
+  <footer style="border-top: 1px solid rgba(247,247,235,0.08); background: #052220;">
+    <div style="max-width: 1160px; margin: 0 auto; padding: clamp(48px, 6vw, 80px) 24px; display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; flex-wrap: wrap;">
       <div>
-        <p style="font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(22px, 3vw, 30px); font-weight: 500; margin: 0 0 12px; max-width: 24ch; text-wrap: pretty;">Let’s build something that ships.</p>
-        <a href="mailto:qinglandesign@gmail.com" style="font-family: 'JetBrains Mono', monospace; font-size: 14px;">qinglandesign@gmail.com</a>
+        <p style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3.2vw, 34px); font-weight: 500; letter-spacing: -0.025em; margin: 0 0 14px; max-width: 24ch; text-wrap: pretty;">Let’s build something that ships.</p>
+        <a href="mailto:qinglandesign@gmail.com" style="font-family: 'Instrument Sans', sans-serif; font-size: 14px;">qinglandesign@gmail.com</a>
       </div>
-      <nav style="display: flex; gap: 24px; flex-wrap: wrap;">
-        <a href="https://www.linkedin.com/in/qinglanzheng/" style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #16150F;">LinkedIn</a>
-        <a href="https://github.com/Qinglanz" style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #16150F;">GitHub</a>
-        <a href="https://medium.com/@qinglan.zheng" style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #16150F;">Medium</a>
-        <a href="https://dribbble.com/qinglanzz" style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #16150F;">Dribbble</a>
+      <nav style="display: flex; gap: 22px; flex-wrap: wrap;">
+        <a href="https://www.linkedin.com/in/qinglanzheng/" style="font-family: 'Instrument Sans', sans-serif; font-size: 14px; color: #F7F7EB;">LinkedIn</a>
+        <a href="https://github.com/Qinglanz" style="font-family: 'Instrument Sans', sans-serif; font-size: 14px; color: #F7F7EB;">GitHub</a>
+        <a href="https://medium.com/@qinglan.zheng" style="font-family: 'Instrument Sans', sans-serif; font-size: 14px; color: #F7F7EB;">Medium</a>
+        <a href="https://dribbble.com/qinglanzz" style="font-family: 'Instrument Sans', sans-serif; font-size: 14px; color: #F7F7EB;">Dribbble</a>
       </nav>
     </div>
-    <div style="max-width: 1120px; margin: 0 auto; padding: 0 24px 32px;">
-      <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B887E; margin: 0;">Toronto, Canada · © 2026 Qinglan Zheng · Designed and coded by me</p>
+    <div style="max-width: 1160px; margin: 0 auto; padding: 0 24px 32px;">
+      <p style="font-family: 'Instrument Sans', sans-serif; font-size: 12px; color: #8CA39C; margin: 0;">Toronto, Canada · © 2026 Qinglan Zheng · Designed and coded by me</p>
     </div>
   </footer>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;showAvailability&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Hero&quot;}}">
+<script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
+  state = { statGrowth: 300, statSignals: "2,900", statCompletion: "91.1", statRatio: "2000", theme: "dark" };
+
+  async _loadTheme() {
+    this._themeMod = await import("./theme-swap.js");
+    const theme = this._themeMod.readTheme("qz-portfolio-theme");
+    this.setState({ theme }, () => this._themeMod.applyTheme(theme));
+  }
+
+  componentDidUpdate() {
+    if (this._themeMod && this.state.theme === "light") this._themeMod.applyTheme("light");
+  }
+
+  componentDidMount() {
+    this._loadTheme();
+    const targets = [
+      { key: "statGrowth", to: 300, fmt: (v) => Math.round(v).toLocaleString() },
+      { key: "statSignals", to: 2900, fmt: (v) => Math.round(v).toLocaleString() },
+      { key: "statCompletion", to: 91.1, fmt: (v) => v.toFixed(1) },
+      { key: "statRatio", to: 2000, fmt: (v) => Math.round(v).toLocaleString() },
+    ];
+    const start = performance.now();
+    const dur = 1300;
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const next = {};
+      targets.forEach((x) => { next[x.key] = x.fmt(x.to * eased); });
+      this.setState(next);
+      if (t < 1) this._raf = requestAnimationFrame(tick);
+    };
+    this._raf = requestAnimationFrame(tick);
+  }
+
+  componentWillUnmount() { if (this._raf) cancelAnimationFrame(this._raf); }
+
   renderVals() {
     return {
-      showAvailability: this.props.showAvailability ?? true,
-      secondaryCards: [
-        { metric: "#1 channel", title: "Elevating direct-to-consumer to the top acquisition channel", blurb: "Growing DTC from a side door into Fig’s largest source of funded loans.", tag: "FIG · GROWTH", href: "CaseStudy-DTC.dc.html", img: "https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/67ce1b182cdad1bd1a302d6f_cover%20new2.jpg", imgAlt: "fig.ca direct-to-consumer redesign" },
-        { metric: "+revenue", title: "Designing a payment protection opt-in flow to boost revenue", blurb: "An opt-in that earns its yes — clear terms, no dark patterns.", tag: "FIG · PRODUCT", href: "CaseStudy-CreditInsurance.dc.html", img: "uploads/670d74cf89de6c5de42037f0_LPPP2-p-1080.png", imgAlt: "Fig payment protection opt-in flow screens" },
-        { metric: "2000:1", title: "Redesigning the self-serve portal to a 2000:1 customer-to-agent ratio", blurb: "Letting customers manage payments, dates, and payoffs without calling in.", tag: "FIG · PORTAL", href: "CaseStudy-SelfServicePortal.dc.html", img: "uploads/67e71912c47e19402131e540_new crop-p-1080.jpg", imgAlt: "Fig self-service portal shown on a phone" },
-        { metric: "+20% response", title: "Initiating a messaging redesign that increased response rate by 20%", blurb: "Data-driven design across a two-sided care marketplace.", tag: "CAREGUIDE · MESSAGING", href: "CaseStudy-ResponseRate.dc.html", img: "uploads/6733fb2cab967645d5275600_new cover-p-1080.png", imgAlt: "CareGuide messaging app phone mockups" },
-        { metric: "80% would try it", title: "Designing Famealy: a food-sharing platform", blurb: "Connecting busy parents to homemade dinner from local home chefs.", tag: "SIDE PROJECT · MARKETPLACE", href: "CaseStudy-Famealy.dc.html", img: "uploads/64b2e3efe025c96ef1c7eca5_food cover-p-1080.jpg", imgAlt: "Famealy food-sharing platform cover" },
-        { metric: "Before product design", title: "Architectural designs that connect people in the physical world", blurb: "Work from Gensler, AECOM, and GLS — planning, parks, and mixed-use development.", tag: "ARCHITECTURE", href: "CaseStudy-OtherWorks.dc.html", img: "https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/5e0a9017edb7548f8cacec85_HIGH343569_482083_544075.jpg", imgAlt: "Crane Cove Park waterfront design" },
+      statGrowth: this.state.statGrowth,
+      statSignals: this.state.statSignals,
+      statCompletion: this.state.statCompletion,
+      statRatio: this.state.statRatio,
+      isLight: this.state.theme === "light",
+      isDark: this.state.theme !== "light",
+      toggleTheme: () => {
+        const next = this.state.theme === "light" ? "dark" : "light";
+        this.setState({ theme: next }, () => {
+          if (this._themeMod) {
+            this._themeMod.applyTheme(next);
+            this._themeMod.saveTheme("qz-portfolio-theme", next);
+          }
+        });
+      },
+      streams: [
+        { label: "Support tickets", value: "~1,500", width: "100%" },
+        { label: "SMS replies", value: "~1,000", width: "67%" },
+        { label: "Figgy chat conversations", value: "~370", width: "25%" },
+        { label: "Funnel steps monitored", value: "14", width: "44%" },
       ],
+      secondaryCards: this._cards().map((c) => ({
+        ...c,
+        setImg: (el) => { if (el && c.img) el.src = c.img.includes("%") ? c.img : encodeURI(c.img); },
+      })),
     };
+  }
+
+  _cards() {
+    return [
+        { metric: "#1 channel", title: "Elevating direct-to-consumer to the top acquisition channel", blurb: "Growing DTC from a side door into Fig’s largest source of funded loans.", tag: "FIG · GROWTH", href: "direct-to-consumer.html", img: "https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/67ce1b182cdad1bd1a302d6f_cover%20new2.jpg", imgAlt: "fig.ca direct-to-consumer redesign" },
+        { metric: "+revenue", title: "Designing a payment protection opt-in flow to boost revenue", blurb: "An opt-in that earns its yes — clear terms, no dark patterns.", tag: "FIG · PRODUCT", href: "payment-protection.html", img: "uploads/670d74cf89de6c5de42037f0_LPPP2-p-1080.png", imgAlt: "Fig payment protection opt-in flow screens" },
+        { metric: "2000:1", title: "Redesigning the self-serve portal to a 2000:1 customer-to-agent ratio", blurb: "Letting customers manage payments, dates, and payoffs without calling in.", tag: "FIG · PORTAL", href: "self-serve-portal.html", img: "uploads/67e71912c47e19402131e540_new crop-p-1080.jpg", imgAlt: "Fig self-service portal shown on a phone" },
+        { metric: "+20% response", title: "Initiating a messaging redesign that increased response rate by 20%", blurb: "Data-driven design across a two-sided care marketplace.", tag: "CAREGUIDE · MESSAGING", href: "response-rate.html", img: "uploads/6733fb2cab967645d5275600_new cover-p-1080.png", imgAlt: "CareGuide messaging app phone mockups" },
+        { metric: "80% would try it", title: "Designing Famealy: a food-sharing platform", blurb: "Connecting busy parents to homemade dinner from local home chefs.", tag: "SIDE PROJECT · MARKETPLACE", href: "famealy.html", img: "uploads/64b2e3efe025c96ef1c7eca5_food cover-p-1080.jpg", imgAlt: "Famealy food-sharing platform cover" },
+        { metric: "Before product design", title: "Architectural designs that connect people in the physical world", blurb: "Work from Gensler, AECOM, and GLS — planning, parks, and mixed-use development.", tag: "ARCHITECTURE", href: "architecture.html", img: "https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/5e0a9017edb7548f8cacec85_HIGH343569_482083_544075.jpg", imgAlt: "Crane Cove Park waterfront design" },
+    ];
   }
 }
 </script>

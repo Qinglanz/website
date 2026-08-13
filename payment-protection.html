@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Designing a payment protection opt-in flow — Qinglan Zheng</title>
+<meta name="description" content="A digital opt-in flow for Fig's Loan Payment Protection Plan, balancing legal compliance, business revenue, and user trust — no agent required.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #072A24; color: #F7F7EB; font-family: 'Instrument Sans', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #7CF06B; text-decoration: none; }
+  a:hover { color: #A8FA9C; text-decoration: underline; text-underline-offset: 3px; }
+  ::selection { background: #7CF06B; color: #072A24; }
+
+  @keyframes riseIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(0.82); } }
+  h1, h2 { animation: riseIn 0.7s cubic-bezier(0.2,0.7,0.2,1) both; }
+  img { transition: transform 0.4s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.4s ease; }
+  img:hover { transform: translateY(-4px) scale(1.006); box-shadow: 0 22px 60px -30px rgba(124,240,107,0.45); }
+  a[href] { transition: color 0.2s ease, opacity 0.2s ease; }
+  [data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity 0.7s cubic-bezier(0.2,0.7,0.2,1), transform 0.7s cubic-bezier(0.2,0.7,0.2,1); }
+  [data-reveal].is-in { opacity: 1; transform: none; }
+</style>
+<script>
+  (function () {
+    var run = function () {
+      var host = document.querySelector('x-dc') || document.body;
+      var kids = host.querySelectorAll('section, figure, footer');
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+      kids.forEach(function (el, i) {
+        if (i === 0) return;
+        el.setAttribute('data-reveal', '');
+        el.style.transitionDelay = Math.min(i % 3, 2) * 70 + 'ms';
+        io.observe(el);
+      });
+    };
+    if (document.readyState === 'complete' || document.readyState === 'interactive') setTimeout(run, 400);
+    else window.addEventListener('DOMContentLoaded', function () { setTimeout(run, 400); });
+  })();
+</script>
+</helmet>
+
+<div style="min-height: 100vh; background: #072A24;">
+  <header style="max-width: 800px; margin: 0 auto; padding: 26px 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <a href="index.html" style="display: flex; align-items: center; gap: 9px; font-family: 'Instrument Sans', sans-serif; font-size: 14px; font-weight: 500; color: #F7F7EB; letter-spacing: 0.02em;">
+      <span style="width: 8px; height: 8px; border-radius: 50%; background: #7CF06B; box-shadow: 0 0 12px rgba(124,240,107,0.8); animation: pulseDot 2.4s ease-in-out infinite;"></span>qinglan.zheng
+    </a>
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="index.html#work" style="font-family: 'Instrument Sans', sans-serif; font-size: 13px; color: #9AA79F;">← all work</a>
+      <a href="about.html" style="font-family: 'Instrument Sans', sans-serif; font-size: 13px; color: #9AA79F;">About</a>
+      <button type="button" onClick="{{ toggleTheme }}" aria-label="Toggle light and dark mode" style="display: inline-flex; align-items: center; justify-content: center; color: #F7F7EB; background: rgba(247,247,235,0.06); border: 1px solid rgba(247,247,235,0.16); border-radius: 999px; width: 34px; height: 34px; padding: 0; cursor: pointer;" style-hover="border-color: #7CF06B; color: #7CF06B;">
+        <sc-if value="{{ isDark }}" hint-placeholder-val="{{ true }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"></path></svg></sc-if>
+        <sc-if value="{{ isLight }}" hint-placeholder-val="{{ false }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"></path></svg></sc-if>
+      </button>
+    </div>
+  </header>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: clamp(56px, 9vw, 96px) 24px 48px;">
+    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 28px; flex-wrap: wrap;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; border: 1px solid rgba(124,240,107,0.32); border-radius: 4px; padding: 4px 8px;">~9% conversion · &lt;1% drop-off</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8CA39C;">FIG · PAYMENT PROTECTION · 2024</span>
+    </div>
+    <h1 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(34px, 5.5vw, 56px); line-height: 1.1; letter-spacing: -0.015em; margin: 0 0 24px; text-wrap: pretty;">Designing a payment protection opt-in flow to boost revenue</h1>
+    <p style="font-size: 19px; line-height: 1.6; color: #AFB8AC; max-width: 56ch; margin: 0; text-wrap: pretty;">A fully digital experience letting borrowers opt into Fig's Loan Payment Protection Plan during booking — balancing business objectives, legal compliance, and user needs.</p>
+    <div style="display: flex; gap: 32px; flex-wrap: wrap; margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(247,247,235,0.13);">
+      <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8CA39C; margin-bottom: 4px;">TIMELINE</div><div style="font-size: 15px;">April–June 2024</div></div>
+      <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8CA39C; margin-bottom: 4px;">ROLE</div><div style="font-size: 15px;">Lead designer</div></div>
+      <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8CA39C; margin-bottom: 4px;">TEAM</div><div style="font-size: 15px;">Director of Product, Engineers, Legal, Insurance partners</div></div>
+      <div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8CA39C; margin-bottom: 4px;">STATUS</div><div style="font-size: 15px;">Launched</div></div>
+    </div>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 0 24px 40px;">
+    <div style="border-radius: 12px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);">
+      <img src="uploads/670d74cf89de6c5de42037f0_LPPP2-p-1080.png" alt="Fig payment protection opt-in flow screens" style="width: 100%; display: block;">
+    </div>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">01 · The problem</div>
+    <h2 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">Revenue beyond lending, protection beyond the loan</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #D8DCCE; max-width: 62ch; margin: 0 0 24px;">There was a business need for Fig to extend its revenue beyond lending, and a user need to protect their loan payment. Payment protection served both: additional revenue stream, reduced credit loss, and protection for borrowers.</p>
+    <div style="border-radius: 12px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);">
+      <img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/672ae77ddc2fe90d9adf5b34_14304439_FSC_10722.jpg" alt="Payment protection plan overview" style="width: 100%; display: block;">
+    </div>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">02 · The challenge</div>
+    <h2 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">Selling insurance without a salesperson</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #D8DCCE; max-width: 62ch; margin: 0;">Insurance is typically a product that must be "sold" rather than "bought." The challenge: sell this complicated product without an agent, while minimizing user drop-off and ensuring legal compliance.</p>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">03 · The outcome</div>
+    <h2 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">Transparency, simplicity, user control</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #D8DCCE; max-width: 62ch; margin: 0 0 24px;">A simple flow guided by three design principles: transparency, simplicity, and user control.</p>
+    <div style="border-radius: 12px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13);">
+      <img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/68d43bc227a0d9c0f695c469_LPPP.jpg" alt="Payment protection opt-in flow screens" style="width: 100%; display: block;">
+    </div>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">04 · The impact</div>
+    <h2 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 24px; text-wrap: pretty;">A new revenue stream beyond lending</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; margin-bottom: 24px;">
+      <div style="background: #0B352E; border: 1px solid rgba(247,247,235,0.13); border-radius: 10px; padding: 22px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 26px; color: #7CF06B; margin-bottom: 6px;">~9%</div>
+        <div style="font-size: 14px; color: #AFB8AC;">Conversion rate</div>
+      </div>
+      <div style="background: #0B352E; border: 1px solid rgba(247,247,235,0.13); border-radius: 10px; padding: 22px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 26px; color: #7CF06B; margin-bottom: 6px;">&lt;1%</div>
+        <div style="font-size: 14px; color: #AFB8AC;">Drop-off rate</div>
+      </div>
+    </div>
+    <div style="border-radius: 12px; overflow: hidden; border: 1px solid rgba(247,247,235,0.13); margin-bottom: 20px;">
+      <img src="https://cdn.prod.website-files.com/5d953488cacfb211c72abf50/672e991ae0c3a6eb2917ab23_Screen%20Shot%202024-11-08%20at%206.04.49%20PM.png" alt="Payment protection conversion results" style="width: 100%; display: block;">
+    </div>
+    <blockquote style="margin: 0; padding: 20px 24px; background: #0B352E; border: 1px solid rgba(247,247,235,0.13); border-left: 3px solid #7CF06B; border-radius: 4px;">
+      <p style="font-size: 16px; line-height: 1.6; color: #D8DCCE; margin: 0 0 8px; font-style: italic;">"This is really solid result given your target customers are prime customers. Typically this type of product is more attractive to sub-prime or near-prime customers."</p>
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8CA39C;">— Insurance partner</div>
+    </blockquote>
+  </section>
+
+  <section style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">05 · Post-launch</div>
+    <h2 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; margin: 0 0 20px; text-wrap: pretty;">Gathering feedback, aligning the roadmap</h2>
+    <p style="font-size: 17px; line-height: 1.7; color: #D8DCCE; max-width: 62ch; margin: 0 0 24px;">I conducted post-launch user interviews and reviewed session recordings to confirm the flow worked as expected, and partnered with product on the roadmap: pricing tests, product bundling, new entry points in the self-serve portal, and CX/marketing collaborations.</p>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <blockquote style="margin: 0; padding: 20px 24px; background: #0B352E; border: 1px solid rgba(247,247,235,0.13); border-left: 3px solid #7CF06B; border-radius: 4px;">
+        <p style="font-size: 16px; line-height: 1.6; color: #D8DCCE; margin: 0 0 8px; font-style: italic;">"Yes I recalled seeing the offering, I just looked at it and I thought it would be good. I know it's for protecting my payment from unemployment and critical illness, etc. It's a bit pricy, but I wanted to try it out for a few months first."</p>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8CA39C;">— Borrower</div>
+      </blockquote>
+      <blockquote style="margin: 0; padding: 20px 24px; background: #0B352E; border: 1px solid rgba(247,247,235,0.13); border-left: 3px solid #7CF06B; border-radius: 4px;">
+        <p style="font-size: 16px; line-height: 1.6; color: #D8DCCE; margin: 0 0 8px; font-style: italic;">"Qinglan has been leading the charge on the design for the payment protection project. She's done a masterful job incorporating everyone's feedback while exhibiting great thought leadership — balancing customer and business needs, always keeping an eye on detail and UX."</p>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8CA39C;">— Internal team</div>
+      </blockquote>
+    </div>
+  </section>
+
+  <footer style="border-top: 1px solid rgba(247,247,235,0.08); background: #052220;">
+    <div style="max-width: 800px; margin: 0 auto; padding: 40px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <a href="index.html" style="font-family: 'Instrument Sans', sans-serif; font-size: 14px;">← Back to all work</a>
+      <a href="self-serve-portal.html" style="font-family: 'Instrument Sans', sans-serif; font-size: 14px;">Next: Self-serve portal →</a>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { theme: "dark" };
+
+  async _loadTheme() {
+    this._themeMod = await import("./theme-swap.js");
+    const theme = this._themeMod.readTheme("qz-portfolio-theme");
+    this.setState({ theme }, () => this._themeMod.applyTheme(theme));
+  }
+
+  _toggleTheme = () => {
+    const next = this.state.theme === "light" ? "dark" : "light";
+    this.setState({ theme: next }, () => {
+      if (this._themeMod) {
+        this._themeMod.applyTheme(next);
+        this._themeMod.saveTheme("qz-portfolio-theme", next);
+      }
+    });
+  };
+
+  componentDidMount() { this._loadTheme(); }
+
+  componentDidUpdate() { if (this._themeMod && this.state.theme === "light") this._themeMod.applyTheme("light"); }
+
+  renderVals() {
+    return {
+      isLight: this.state.theme === "light",
+      isDark: this.state.theme !== "light",
+      toggleTheme: this._toggleTheme,
+    };
+  }
+}
+</script>
+</body>
+</html>
