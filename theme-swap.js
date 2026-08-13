@@ -4,7 +4,7 @@ const PAIRS = [
   ["rgba(56,140,48,0.42)", "rgba(124,240,107,0.30)"],
   ["rgba(56,140,48,0.38)", "rgba(124,240,107,0.26)"],
   ["rgba(56,140,48,", "rgba(124,240,107,"],
-  ["rgba(247,247,235,", "rgba(10,15,13,"],
+  ["rgba(247,247,235,", "rgba(11,51,42,"],
   ["rgba(124,240,107,", "rgba(124,240,107,"],
   ["rgba(4,22,19,", "rgba(255,255,255,"],
   ["#072A24", "#FFFFFF"],
@@ -14,15 +14,15 @@ const PAIRS = [
   ["#0C2A25", "#FBFBF9"],
   ["#104036", "#F1F4EF"],
   ["#0A2E28", "#F2F4F0"],
-  ["#F7F7EB", "#0A0F0D"],
-  ["#D8DCCE", "#26302C"],
-  ["#AFB8AC", "#44514C"],
-  ["#9AA79F", "#52605A"],
-  ["#8CA39C", "#5A6862"],
-  ["#95AAA3", "#64726C"],
-  ["#7D8B85", "#6E7C76"],
-  ["#66807A", "#87948E"],
-  ["#98A39C", "#5A6862"],
+  ["#F7F7EB", "#0B332A"],
+  ["#D8DCCE", "#1E4A3E"],
+  ["#AFB8AC", "#3A6154"],
+  ["#9AA79F", "#4A6E62"],
+  ["#8CA39C", "#517367"],
+  ["#95AAA3", "#5A7A6E"],
+  ["#7D8B85", "#5F8175"],
+  ["#66807A", "#6E8C81"],
+  ["#98A39C", "#517367"],
   ["background: #7CF06B", "background: __FILL__"],
   ["background:#7CF06B", "background:__FILL__"],
   ["background: rgb(124,240,107)", "background: __FILL__"],
@@ -61,11 +61,11 @@ function setOverrides(light) {
     document.head.appendChild(overrideEl);
   }
   overrideEl.textContent = light
-    ? `html, body { background: #FFFFFF !important; color: #0A0F0D !important; }
+    ? `html, body { background: #FFFFFF !important; color: #0B332A !important; }
        a { color: #163300; }
        a:hover { color: #0D2400; }
        ::selection { background: #7CF06B; color: #163300; }
-       img:hover { box-shadow: 0 20px 50px -28px rgba(10,15,13,0.30) !important; }`
+       img:hover { box-shadow: 0 20px 50px -28px rgba(11,51,42,0.30) !important; }`
     : "";
 }
 

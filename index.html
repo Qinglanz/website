@@ -19,6 +19,7 @@
   a:hover { color: #A8FA9C; text-decoration: underline; text-underline-offset: 3px; }
   ::selection { background: #7CF06B; color: #072A24; }
   @keyframes tickerRun { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes spinBorder { from { transform: translate(-50%,-50%) rotate(0turn); } to { transform: translate(-50%,-50%) rotate(1turn); } }
   @keyframes riseIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes barGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
   @keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(0.82); } }
@@ -71,7 +72,8 @@
     <h1 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(40px, 6.6vw, 78px); line-height: 1.02; letter-spacing: -0.03em; margin: 0 0 28px; max-width: 17ch; text-wrap: pretty; animation: riseIn 0.7s ease both;">I’m Qinglan — a senior product designer who ships code.</h1>
     <p style="font-size: clamp(17px, 2vw, 21px); line-height: 1.55; color: #AFB8AC; max-width: 54ch; margin: 0 0 44px; text-wrap: pretty; animation: riseIn 0.8s ease both;">Today I design lending experiences at <a href="https://fig.ca" style="color: #F7F7EB; text-decoration: underline; text-decoration-color: rgba(247,247,235,0.3); text-underline-offset: 4px;">Fig</a> in Toronto — and increasingly ship them as code. My time is split between Fig’s lending funnel and Project Uno, a new everyday bank account.</p>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: rgba(247,247,235,0.10); border: 1px solid rgba(247,247,235,0.10); border-radius: 14px; overflow: hidden; animation: riseIn 0.9s ease both;">
+    <div style="position: relative; border-radius: 14px; padding: 1px; overflow: hidden; isolation: isolate; background: rgba(124,240,107,0.10); animation: riseIn 0.9s ease both;" style-before="content: ''; position: absolute; top: 50%; left: 50%; width: 200%; aspect-ratio: 1; z-index: 0; filter: blur(5px); background: conic-gradient(from 0deg, rgba(124,240,107,0.05) 0deg, rgba(124,240,107,0.85) 60deg, rgba(216,255,206,0.95) 110deg, rgba(124,240,107,0.5) 165deg, rgba(56,140,48,0.15) 230deg, rgba(124,240,107,0.55) 300deg, rgba(124,240,107,0.05) 360deg); animation: spinBorder 6s linear infinite; will-change: transform;">
+    <div style="position: relative; z-index: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: rgba(247,247,235,0.10); border-radius: 13px; overflow: hidden;">
       <div style="background: #0B352E; padding: 26px 24px; display: flex; flex-direction: column; gap: 12px;">
         <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #7CF06B;">Data-driven</div>
         <p style="font-size: 15px; line-height: 1.6; color: #D8DCCE; margin: 0;">I write my own funnel SQL, so the numbers — not opinions — decide which problem is next.</p>
@@ -84,6 +86,7 @@
         <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #7CF06B;">Growth-oriented</div>
         <p style="font-size: 15px; line-height: 1.6; color: #D8DCCE; margin: 0;">Conversion is the brief: I find the lift worth chasing, write the pitch, and run the bet as DRI.</p>
       </div>
+    </div>
     </div>
   </section>
 

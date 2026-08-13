@@ -20,6 +20,7 @@
   ::selection { background: #7CF06B; color: #04231D; }
   @keyframes riseIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(0.82); } }
+  @keyframes spinBorder { from { transform: translate(-50%,-50%) rotate(0turn); } to { transform: translate(-50%,-50%) rotate(1turn); } }
   @keyframes traceLine { from { transform: scaleY(0); } to { transform: scaleY(1); } }
   .lightbox-img { cursor: zoom-in; }
   #lightbox-overlay { position: fixed; inset: 0; background: rgba(4,22,19,0.94); display: none; align-items: center; justify-content: center; z-index: 999; cursor: zoom-out; padding: 32px; }
@@ -102,8 +103,10 @@
     <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7CF06B; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 16px;">02 · The bet</div>
     <h2 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(24px, 3vw, 33px); line-height: 1.2; letter-spacing: -0.025em; margin: 0 0 20px; text-wrap: pretty;">A two-week pilot, Shape Up style</h2>
     <p style="font-size: 17px; line-height: 1.72; color: #D8DCCE; max-width: 62ch; margin: 0 0 16px;">I pitched leadership a small, time-boxed bet: one designer, one engineer, one surface, two weeks. Not a platform initiative — a test of whether AI tooling could let a designer ship real UI changes without breaking engineering review.</p>
-    <div style="background: linear-gradient(150deg, #104036 0%, #0A2E28 100%); border: 1px solid rgba(124,240,107,0.22); border-radius: 14px; padding: 28px; margin-top: 26px;">
-      <p style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 21px; line-height: 1.45; letter-spacing: -0.02em; color: #F7F7EB; margin: 0;">“I wasn't sure Phase 3 would ever become real. It did.”</p>
+    <div style="position: relative; border-radius: 14px; padding: 1px; margin-top: 26px; overflow: hidden; isolation: isolate; background: rgba(124,240,107,0.10);" style-before="content: ''; position: absolute; top: 50%; left: 50%; width: 200%; aspect-ratio: 1; z-index: 0; filter: blur(5px); background: conic-gradient(from 0deg, rgba(124,240,107,0.05) 0deg, rgba(124,240,107,0.85) 60deg, rgba(216,255,206,0.95) 110deg, rgba(124,240,107,0.5) 165deg, rgba(56,140,48,0.15) 230deg, rgba(124,240,107,0.55) 300deg, rgba(124,240,107,0.05) 360deg); animation: spinBorder 6s linear infinite; will-change: transform;">
+      <div style="position: relative; z-index: 1; background: linear-gradient(150deg, #104036 0%, #0A2E28 100%); border-radius: 13px; padding: 28px;">
+        <p style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 21px; line-height: 1.45; letter-spacing: -0.02em; color: #F7F7EB; margin: 0;">“I wasn't sure Phase 3 would ever become real. It did.”</p>
+      </div>
     </div>
   </section>
 
